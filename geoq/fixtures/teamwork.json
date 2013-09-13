@@ -1,0 +1,64 @@
+[
+{
+    "pk": 1, 
+    "model": "teamwork.team", 
+    "fields": {
+        "modified": "2013-08-26T18:51:39.106Z", 
+        "created": "2013-08-26T18:51:39.105Z", 
+        "name": "Test", 
+        "founder": 1, 
+        "description": "Test"
+    }
+},
+{
+    "pk": 2, 
+    "model": "teamwork.team", 
+    "fields": {
+        "modified": "2013-08-29T02:53:56.979Z", 
+        "created": "2013-08-29T02:53:56.979Z", 
+        "name": "hurricane_sandy", 
+        "founder": 1, 
+        "description": ""
+    }
+},
+{
+    "pk": 1, 
+    "model": "teamwork.role", 
+    "fields": {
+        "users": [
+            3, 
+            5
+        ], 
+        "description": "", 
+        "permissions": [
+            35, 
+            32
+        ], 
+        "name": "evaluator", 
+        "team": 2
+    }
+},
+{
+    "pk": 2, 
+    "model": "teamwork.role", 
+    "fields": {
+        "users": [
+            4
+        ], 
+        "description": "", 
+        "permissions": [
+            34, 
+            35, 
+            36, 
+            31, 
+            32, 
+            33, 
+            28, 
+            29, 
+            30
+        ], 
+        "name": "supervisor", 
+        "team": 2
+    }
+}
+]

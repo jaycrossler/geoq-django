@@ -1,0 +1,10 @@
+<ul class="statlist pull-right">
+    <li title="{{ object.job.project.name }}">
+        <i class="icon-briefcase"></i>
+        <a href="{{ object.job.project.get_absolute_url }}">{{ object.job.project.name }}</a>
+    </li>
+    <li title="This AOI is {{ object.status }}">
+        <i class="icon-th"></i>
+        {{ object.status }}
+    </li>
+</ul>
