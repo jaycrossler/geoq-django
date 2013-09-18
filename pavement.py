@@ -80,7 +80,8 @@ def createdb(options):
     from geoq import settings
     template = options.get('template', 'template_postgis')
     database = settings.DATABASES.get('default').get('NAME')
-    sh('createdb {database} -T {template}'.format(database=database, template=template))
+    sh('createdb {database}'.format(database=database, template=template))
+    sh('echo "CREATE EXTENSION postgis;CREATE EXTENSION postgis_topology" | psql -d  {database}'.format(database=database))
 
 
 @task
