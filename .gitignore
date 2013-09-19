@@ -1,4 +1,7 @@
+CACHE/*
+
 *.log
 *.pot
 *.pyc
 local_settings.py
+
