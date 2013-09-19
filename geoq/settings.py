@@ -217,8 +217,8 @@ LOGGING = {
 
 # Override production settings with local settings if they exist
 try:
-    from dev_settings import *
+    from local_settings import *
 
 except ImportError, e:
-    # dev_settings does not exist
+    # local_settings does not exist
     pass
