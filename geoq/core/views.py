@@ -77,7 +77,7 @@ class CreateFeaturesView(DetailView):
     def get_context_data(self, **kwargs):
         cv = super(CreateFeaturesView, self).get_context_data(**kwargs)
         cv['layer'] = Layer.objects.all()[0]
-        cv['map'] = Map.objects.all()[0].map_layers_json()
+        cv['map'] = self.object.job.map #Map.objects.all()[0].map_layers_json()
         return cv
 
 

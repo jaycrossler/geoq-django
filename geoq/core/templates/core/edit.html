@@ -13,7 +13,7 @@
 
         var aoi_id = {{ object.id }};
         var aoi_extents_geojson = {{ object.polygon.json|safe }};
-        var aoi_map_json = {{ map.to_json|safe }};
+        var aoi_map_json = {{ map.to_json|safe|default:"{}" }};
         var activeStyle = {};
         var current_feature_type_id = null;
         var create_feature_url = "{% url 'feature-create' %}";

@@ -3,7 +3,7 @@ import requests
 from core.models import AOI
 from django.contrib.gis.geos import GEOSGeometry
 from django.core.exceptions import ValidationError
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView, DetailView, ListView, TemplateView, UpdateView, View
@@ -61,6 +61,8 @@ class CreateMapView(CreateView):
     """
     Renders both the Map form and an inline form for map layers.
     """
+
+    success_url = reverse_lazy('home')
 
     def get_context_data(self, **kwargs):
         cv = super(CreateMapView, self).get_context_data(**kwargs)
