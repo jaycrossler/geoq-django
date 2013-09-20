@@ -254,7 +254,6 @@ class Feature(models.Model):
 
         geojson = SortedDict()
         geojson["type"] = "Feature"
-        print self.id
         geojson["properties"] = dict(id=self.id,
                                      template=self.template.id if hasattr(self.template, "id") else None
                                      )
@@ -268,7 +267,6 @@ class Feature(models.Model):
     def clean(self):
         obj_geom_type = self.the_geom.geom_type.lower()
         template_geom_type = self.template.type.lower()
-        print 'here'
         if obj_geom_type != template_geom_type:
             error_text = "Feature type {0} does not match the template's feature type {1}."
             raise ValidationError(error_text.format(obj_geom_type, template_geom_type))
