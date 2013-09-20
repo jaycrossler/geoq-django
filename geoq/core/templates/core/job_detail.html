@@ -68,6 +68,9 @@
                         {% if 'core.delete_aoi' in request.base_perms %}
                         <li><a href="#TODO">Delete AOIs</a></li>
                         {% endif %}
+                        {% if 'core.change_job' in request.base_perms and object.map%}
+                        <li><a href="{% url 'map-update' object.map.id %}">Edit Map</a></li>
+                        {% endif %}
                     </ul>
                 </div>
                 {% endif %}
