@@ -50,8 +50,8 @@ def install_dev_fixtures():
 @task
 def sync():
     """ Runs the syncdb process with migrations """
-    sh("python manage.py syncdb --noinput --no-initial-data")
-    sh("python manage.py migrate --all --no-initial-data")
+    sh("python manage.py syncdb --noinput")
+    sh("python manage.py migrate --all")
 
 
 @cmdopts([
