@@ -21,7 +21,7 @@ Mac OSX Development Build Instructions::
         % mkdir -p ~/pyenv
         % virtualenv --no-site-packages ~/pyenv/geoq
         % source ~/pyenv/geoq/bin/activate
-        % git clone [repo location]
+        % git clone https://github.com/jaycrossler/geoq-django
         % cd geoq
         % pip install paver
         % paver install_dependencies
