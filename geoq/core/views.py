@@ -143,6 +143,7 @@ class JobDetailedListView(ListView):
 
 class JobDelete(DeleteView):
     model = Job
+    template_name = "core/generic_confirm_delete.html"
 
     def get_success_url(self):
         return reverse('project-detail', args=[self.object.project.pk])
@@ -150,6 +151,7 @@ class JobDelete(DeleteView):
 
 class AOIDelete(DeleteView):
     model = AOI
+    template_name = "core/generic_confirm_delete.html"
 
     def get_success_url(self):
         return reverse('job-detail', args=[self.object.job.pk])
