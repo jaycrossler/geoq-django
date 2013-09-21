@@ -9,7 +9,7 @@
             <p>Are you sure you want to continue?</p>
             <form method="post" action="">
                 {% csrf_token %}
-                <input type="submit" class="btn btn-danger" value="Confirm Delete"/> <a class="btn" href="{% url 'job-detail' object.id %}">Cancel</a>
+                <input type="submit" class="btn btn-danger" value="Confirm Delete"/> <a class="btn" href="javascript:history.go(-1)">Cancel</a>
             </form>
         </div>
 
