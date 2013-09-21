@@ -1,0 +1,19 @@
+{% extends "core/base.html" %}
+{% load object_class %}
+{% block container %}
+
+    <div class="row-fluid container-narrow">
+
+        <div class="span12">
+            <h3>You are about to delete Job: {{ object.name }}</h3>
+            <p>Are you sure you want to continue?</p>
+            <form method="post" action="">
+                {% csrf_token %}
+                <input type="submit" value="Confirm Delete"/>
+            </form>
+            <p><a href="{% url 'job-detail' object.id %}">Cancel</a></p>
+        </div>
+
+    </div>
+{% endblock %}
+

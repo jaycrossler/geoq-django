@@ -65,9 +65,6 @@
                         {% if 'core.add_job' in request.base_perms %}
                         <li><a href="{% url 'job-create' %}">Add New Job</a></li>
                         {% endif %}
-                        {% if 'core.delete_job' in request.base_perms %}
-                        <li><a href="#TODO">Delete Job</a></li>
-                        {% endif %}
                     </ul>
                 </div>
                 {% endif %}

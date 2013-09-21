@@ -6,7 +6,8 @@ from django.contrib.gis.geos import GEOSGeometry
 from django.forms.util import ValidationError
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from django.views.generic import DetailView, ListView, TemplateView, View
+from django.views.generic import DetailView, ListView, TemplateView, View, DeleteView
+from django.core.urlresolvers import reverse
 
 from teamwork.models import Team
 
@@ -114,6 +115,13 @@ class JobDetailedListView(ListView):
         cv['statuses'] = AOI.STATUS_VALUES
         cv['active_status'] = self.status
         return cv
+
+
+class JobDelete(DeleteView):
+    model = Job
+
+    def get_success_url(self):
+        return reverse('project-detail', args=[self.object.project.pk])
 
 
 class ChangeAOIStatus(View):
