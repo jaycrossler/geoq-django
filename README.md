@@ -15,9 +15,14 @@ The ``geoq/settings.py`` file contains installation-specific settings. The Datab
 
 Mac OSX Development Build Instructions::
 
-1. Install PostGIS 2.0 using instructions at https://docs.djangoproject.com/en/dev/ref/contrib/gis/install/postgis/
-2. Install a Geoserver (we recommend the OGC Geoserver at https://github.com/geoserver)
+1. Install PostGIS 2.0 using instructions at [https://docs.djangoproject.com/en/dev/ref/contrib/gis/install/#macosx](https://docs.djangoproject.com/en/dev/ref/contrib/gis/install/#macosx). There are several options there, but for most, the easiest option is to follow the Homebrew instructions. If you don't have Homebrew installed, follow the (one line) instruction at [http://brew.sh](http://brew.sh).
+
+	One exception: Instead of using brew to install postgres, it's usually easier to install Postgres.app from [postgresapp.com](http://postgresapp.com). After installing, add the app's bin directory (``/Applications/Postgres.app/Contents/MacOS/bin``) to your PATH.
+
+2. (Optional) Install a Geoserver (we recommend the OGC Geoserver at [https://github.com/geoserver](https://github.com/geoserver))
+
 3. Make sure Python, Virtualenv, and Git are installed
+
 4. Install and setup geoq-django:
 
         % mkdir -p ~/pyenv
@@ -34,16 +39,20 @@ Mac OSX Development Build Instructions::
         % paver create_db_user
         % paver sync
 
-6. Load development fixtures:
+6. (Optional) Load development fixtures:
+
         % paver install_dev_fixtures # creates an admin/admin superuser
 
-7. Build user accounts
+7. Build user accounts:
+
         % python manage.py createsuperuser
 
-8. Install less and add its folder ("type -p less") to your bash profile.
+8. Install less and add its folder ("type -p less") to your bash profile:
+
         % npm install -g less
 
-9. Startup
+9. Start it up!
+
         % paver start_django
 
 
