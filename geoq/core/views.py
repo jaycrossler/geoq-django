@@ -148,6 +148,13 @@ class JobDelete(DeleteView):
         return reverse('project-detail', args=[self.object.project.pk])
 
 
+class AOIDelete(DeleteView):
+    model = AOI
+
+    def get_success_url(self):
+        return reverse('job-detail', args=[self.object.job.pk])
+
+
 class ChangeAOIStatus(View):
     http_method_names = ['post']
 

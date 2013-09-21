@@ -53,7 +53,7 @@
             </p>
 
             <div class="row body" style="height:250px; margin-top:25px">
-                {% if 'core.add_aoi' in request.base_perms or 'core.delete_aoi' in request.base_perms %}
+                {% if 'core.add_aoi' in request.base_perms %}
                 <div class="btn-group pull-right">
                     <a class="btn btn-mini" href="{{ object.get_update_url }}">
                         <b> Edit Job </b>
@@ -67,9 +67,6 @@
                         {% endif %}
                         {% if 'core.delete_job' in request.base_perms %}
                         <li><a href="{% url 'job-delete' object.id %}">Delete Job</a></li>
-                        {% endif %}
-                        {% if 'core.delete_aoi' in request.base_perms %}
-                        <li><a href="#TODO">Delete AOIs</a></li>
                         {% endif %}
                         {% if 'core.change_job' in request.base_perms and object.map%}
                         <li><a href="{% url 'map-update' object.map.id %}">Edit Map</a></li>

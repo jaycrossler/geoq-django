@@ -26,7 +26,7 @@ from django.conf.urls import patterns, url
 from django.views.generic import CreateView, TemplateView, ListView, UpdateView
 from forms import AOIForm, JobForm, ProjectForm
 from models import AOI, Project, Job
-from views import BatchCreateAOIS, CreateFeaturesView, Dashboard, DetailedListView, JobDetailedListView, ChangeAOIStatus, JobDelete
+from views import BatchCreateAOIS, CreateFeaturesView, Dashboard, DetailedListView, JobDetailedListView, ChangeAOIStatus, JobDelete, AOIDelete
 
 urlpatterns = patterns('',
     url(r'^$', Dashboard.as_view(), name='home'),
@@ -86,6 +86,9 @@ urlpatterns = patterns('',
                            template_name='core/generic_form.html',
                            form_class=AOIForm),
         name='aoi-update'),
+    url(r'^aois/delete/(?P<pk>\d+)/?$',
+        AOIDelete.as_view(),
+        name='aoi-delete'),
 
     # OTHER URLS
     url(r'^edit/?$', TemplateView.as_view(template_name='core/edit.html'), name='edit'),
