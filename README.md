@@ -17,11 +17,16 @@ Mac OSX Development Build Instructions::
 
 1. Install PostGIS 2.0 using instructions at https://docs.djangoproject.com/en/dev/ref/contrib/gis/install/postgis/
 2. Install a Geoserver (we recommend the OGC Geoserver at https://github.com/geoserver)
+3. Make sure Python, Virtualenv, and Git are installed
+4. Install and setup geoq-django:
 
         % mkdir -p ~/pyenv
         % virtualenv --no-site-packages ~/pyenv/geoq
         % source ~/pyenv/geoq/bin/activate
         % git clone https://github.com/jaycrossler/geoq-django
+        
+5. Create the database and sync dependencies and data
+
         % cd geoq
         % pip install paver
         % paver install_dependencies
@@ -29,16 +34,16 @@ Mac OSX Development Build Instructions::
         % paver create_db_user
         % paver sync
 
-3. If you would like to load development fixtures:
+6. Load development fixtures:
         % paver install_dev_fixtures # creates an admin/admin superuser
 
-4. Build user accounts
+7. Build user accounts
         % python manage.py createsuperuser
 
-5. Install less and add its folder ("type -p less") to your bash profile.
+8. Install less and add its folder ("type -p less") to your bash profile.
         % npm install -g less
 
-6. Startup
+9. Startup
         % paver start_django
 
 
@@ -53,4 +58,4 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 
 ### TODOs ###
-Current next development goals are tracked in ```geoq/TODO.rst```.  Additionally, we maintain a non-publicly accessible work tracking site for bugs and feature requests. If there is enough community interest, this might be ported to Github.
+Current next development goals are tracked as Issues within GitHub, and high-level goals are in ```geoq/TODO.rst```.
