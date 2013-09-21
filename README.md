@@ -27,7 +27,7 @@ Mac OSX Development Build Instructions::
         
 5. Create the database and sync dependencies and data
 
-        % cd geoq
+        % cd geoq-django
         % pip install paver
         % paver install_dependencies
         % paver createdb
