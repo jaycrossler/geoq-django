@@ -53,7 +53,7 @@
             </p>
 
             <div class="row body" style="height:250px; margin-top:25px">
-                {% if 'core.add_job' in request.base_perms or 'core.delete_job' in request.base_perms %}
+                {% if 'core.add_job' in request.base_perms %}
                 <div class="btn-group pull-right">
                     <a class="btn btn-mini" href="{{ object.get_update_url }}">
                         <b> Edit Project </b>
@@ -64,9 +64,6 @@
                     <ul class="dropdown-menu">
                         {% if 'core.add_job' in request.base_perms %}
                         <li><a href="{% url 'job-create' %}">Add New Job</a></li>
-                        {% endif %}
-                        {% if 'core.delete_job' in request.base_perms %}
-                        <li><a href="#TODO">Delete Job</a></li>
                         {% endif %}
                     </ul>
                 </div>
