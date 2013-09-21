@@ -5,10 +5,10 @@ from django.contrib.gis.geos import GEOSGeometry
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render_to_response
+from django.template import RequestContext
 from django.views.generic import CreateView, DetailView, ListView, TemplateView, UpdateView, View
-from django.views.generic.edit import BaseCreateView
-from forms import MapInlineFormset
+from forms import MapForm, MapInlineFormset
 from models import Feature, FeatureType
 import logging
 
@@ -57,16 +57,24 @@ class CreateFeatures(View):
         return HttpResponse([response], mimetype="application/json")
 
 
-class CreateMapView(CreateView):
-    """
-    Renders both the Map form and an inline form for map layers.
-    """
+def create_map(request):
 
-    success_url = reverse_lazy('home')
-
-    def get_context_data(self, **kwargs):
-        cv = super(CreateMapView, self).get_context_data(**kwargs)
-        #TODO: Multiple form processing is currently not working.
-        cv['map_layers'] = MapInlineFormset()
-        cv['custom_form'] = "maps/_maps_form.html"
-        return cv
+    if request.method == 'POST':
+        map = MapForm(request.POST, prefix='map')
+        layer_formset = MapInlineFormset(request.POST, prefix='layers')
+        if map.is_valid() and layer_formset.is_valid():
+            # do something with the cleaned_data on the formsets.
+            m = map.save(commit=False)
+            layer_formset.instance = m
+            m.save()
+            layer_formset.save()
+            return HttpResponseRedirect(reverse('job-list'))
+    else:
+        map = MapForm(prefix='map')
+        layer_formset = MapInlineFormset(prefix='layers')
+        print layer_formset.management_form.as_p
+    return render_to_response('core/generic_form.html', {
+        'form': map,
+        'layer_formset': layer_formset,
+        'custom_form': 'core/map_create.html',
+        },context_instance=RequestContext(request))

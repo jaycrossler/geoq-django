@@ -28,4 +28,4 @@ class MapLayerForm(StyledModelForm):
     class Meta:
         model = MapLayer
 
-MapInlineFormset = inlineformset_factory(Map, MapLayer)
+MapInlineFormset = inlineformset_factory(Map, MapLayer, extra=3)

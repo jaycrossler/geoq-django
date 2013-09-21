@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url
 from django.views.generic import CreateView, UpdateView
 from forms import FeatureTypeForm, MapForm, LayerForm, MapLayerForm
-from views import CreateFeatures, CreateMapView
+from views import CreateFeatures, create_map
 
 urlpatterns = patterns('',
 
@@ -22,7 +22,7 @@ urlpatterns = patterns('',
 
     # Map CRUD Views
     url(r'^create/?$',
-        CreateMapView.as_view(template_name='core/generic_form.html', form_class=MapForm),
+        create_map,
         name='map-create'),
 
     url(r'^update/(?P<pk>\d+)/?$',
