@@ -13,7 +13,6 @@
                     <span class="icon-bar"></span>
                 </a>
                 <a class="brand" href="{%url 'home' %}">{% block brand %}GeoQ{% endblock %}</a>
-
                 <div class="btn-group pull-right">
                     <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="icon-user"></i> {{request.user.username}}
@@ -31,7 +30,6 @@
                         {% endif%}
                     </ul>
                 </div>
-
                 <div class="nav-collapse">
                     <ul class="nav">
                         {%for key,value in menu_items.items%}
@@ -57,7 +55,7 @@
                         {%endfor%}
 
                         <li id="navbar-additions"></li>
-
+			<li><a href="/badges/"> {% include "badges/badges_display.html" %}</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>

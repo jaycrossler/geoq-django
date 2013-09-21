@@ -9,8 +9,6 @@ class AOICompleter(badges.MetaBadge):
     level = "1"
     def check_aoi(self,instance):
         if instance.analyst and instance.status == "Completed":
-            import pdb
-            pdb.set_trace()
             newscore = AOI.objects.filter(analyst=instance.analyst,status="Completed").count() * 5 + 1
             #TODO: check if this changed?
             instance.analyst.get_profile().score = newscore
