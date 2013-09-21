@@ -4,6 +4,8 @@ from django.contrib.gis.db import models
 from django.contrib.gis.geos import MultiPolygon
 from django.core.urlresolvers import reverse
 from django.utils.datastructures import SortedDict
+from django.db.models.signals import post_save
+
 from managers import AOIManager
 
 TRUE_FALSE = [(0, 'False'), (1, 'True')]
@@ -190,3 +192,21 @@ class AOI(GeoQBase):
     class Meta:
         verbose_name = 'Area of Interest'
         verbose_name_plural = 'Areas of Interest'
+
+
+class UserProfile(models.Model):  
+    """ from http://stackoverflow.com/questions/44109/extending-the-user-model-with-custom-fields-in-django; this is one mechanism for adding extra details (currently score for badges) to the User model """
+    defaultScore = 1
+    user = models.OneToOneField(User)  
+    score = models.IntegerField(default=defaultScore)
+
+    def __str__(self):  
+          return "%s's profile" % self.user  
+
+def create_user_profile(sender, instance, created, **kwargs):  
+    if created:  
+       profile, created = UserProfile.objects.get_or_create(user=instance)  
+
+post_save.connect(create_user_profile, sender=User)
+
+from meta_badges import *

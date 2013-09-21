@@ -13,9 +13,20 @@
         "user_permissions": [],
         "password": "pbkdf2_sha256$10000$5GgXfwiL8ayC$Q4NSRslo7FvMkBpaxta9ZE5UEHxp3XH0f0Zi8ADRuv4=",
         "email": "admin@example.com",
-        "date_joined": "2013-07-23T13:44:15.013Z"
+        "date_joined": "2013-07-23T13:44:15.013Z",
+	"userprofile" : 1
     }
 },
+
+{
+  "pk": 1, 
+  "model": "core.userprofile", 
+  "fields": {
+    "score": 1, 
+    "user": 1
+  }
+},
+
 
     {
     "pk": 1, 

@@ -1,0 +1,3 @@
+Pip install django-badges
+pip install PIL (un-identified dependency)
+Modified models to add metabadge and also add user profile

@@ -18,12 +18,14 @@ DATABASES = {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'geoq_django',  # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-        'USER': 'admin',
-        'PASSWORD': 'admin',
+        'USER': 'geoq_user',
+        'PASSWORD': '0NYCEVaBl1OXx8NTjy5A',
         'HOST': 'localhost',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '5432',  # Set to empty string for default.
     }
 }
+
+AUTH_PROFILE_MODULE = 'core.UserProfile'
 
 # Use this to change the base bootstrap library
 #BOOTSTRAP_BASE_URL = None
@@ -183,6 +185,7 @@ INSTALLED_APPS = (
     'jsonfield',
     'teamwork',     # sets up teams, rolls, & policy for permissions
     'stronghold',   # sets default to require auth
+    'badges', # django badges
 )
 
 # A sample logging configuration. The only tangible logging
