@@ -28,9 +28,9 @@ import requests
 from django.contrib.auth.models import User
 from django.contrib.gis.geos import GEOSGeometry
 from django.forms.util import ValidationError
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from django.views.generic import DetailView, ListView, TemplateView, View, DeleteView
+from django.views.generic import DetailView, ListView, TemplateView, View, DeleteView, CreateView
 from django.core.urlresolvers import reverse
 
 from teamwork.models import Team
@@ -155,6 +155,21 @@ class AOIDelete(DeleteView):
 
     def get_success_url(self):
         return reverse('job-detail', args=[self.object.job.pk])
+
+
+class CreateJobView(CreateView):
+    """
+    Create view that adds the user that created the job as a reviewer.
+    """
+
+    def form_valid(self, form):
+        """
+        If the form is valid, save the associated model and add the current user as a reviewer.
+        """
+        self.object = form.save()
+        self.object.reviewers.add(self.request.user)
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class ChangeAOIStatus(View):
