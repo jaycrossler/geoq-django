@@ -1,74 +1,92 @@
 [
 {
-    "pk": 3,
-    "model": "auth.user",
-    "fields": {
-        "username": "Joe-Analyst",
-        "first_name": "",
-        "last_name": "",
-        "is_active": true,
-        "is_superuser": false,
-        "is_staff": false,
-        "last_login": "2013-08-26T19:04:31.510Z",
-        "groups": [],
-        "user_permissions": [],
-        "password": "pbkdf2_sha256$10000$5SG0WJi6yklH$qAYrTvlLdpxu3Qkmxm8aSLRUVpLvJPXf/AFaDe2Hz3w=",
-        "email": "",
-        "date_joined": "2013-08-26T19:04:31.510Z"
-    }
+  "pk": 1, 
+  "model": "auth.user", 
+  "fields": {
+    "username": "admin", 
+    "first_name": "", 
+    "last_name": "", 
+    "is_active": true, 
+    "is_superuser": true, 
+    "is_staff": true, 
+    "last_login": "2013-09-21T16:54:59.496Z", 
+    "groups": [], 
+    "user_permissions": [], 
+    "password": "pbkdf2_sha256$10000$5GgXfwiL8ayC$Q4NSRslo7FvMkBpaxta9ZE5UEHxp3XH0f0Zi8ADRuv4=", 
+    "email": "admin@example.com", 
+    "date_joined": "2013-07-23T13:44:15.013Z"
+  }
 },
 {
-    "pk": 4,
-    "model": "auth.user",
-    "fields": {
-        "username": "Suzy-supervisor",
-        "first_name": "",
-        "last_name": "",
-        "is_active": true,
-        "is_superuser": false,
-        "is_staff": true,
-        "last_login": "2013-08-29T23:12:35.579Z",
-        "groups": [],
-        "user_permissions": [],
-        "password": "pbkdf2_sha256$10000$Poae3qSWirQb$qRjMRlY9P9+rGrGAe8/UAk6icDQ0g+TO2x8Qw+f9BwE=",
-        "email": "",
-        "date_joined": "2013-08-26T19:04:41Z"
-    }
+  "pk": 3, 
+  "model": "auth.user", 
+  "fields": {
+    "username": "Joe-Analyst", 
+    "first_name": "", 
+    "last_name": "", 
+    "is_active": true, 
+    "is_superuser": false, 
+    "is_staff": false, 
+    "last_login": "2013-09-21T16:54:47.884Z", 
+    "groups": [], 
+    "user_permissions": [], 
+    "password": "pbkdf2_sha256$10000$NANXShARQnfr$dv8MBihJbye5i5/gdrttaOoSzgiy4RG8+3ZydBK38R0=", 
+    "email": "", 
+    "date_joined": "2013-08-26T19:04:31Z"
+  }
 },
 {
-    "pk": 5,
-    "model": "auth.user",
-    "fields": {
-        "username": "Roy-reviewer",
-        "first_name": "",
-        "last_name": "",
-        "is_active": true,
-        "is_superuser": false,
-        "is_staff": false,
-        "last_login": "2013-08-26T19:05:07Z",
-        "groups": [],
-        "user_permissions": [],
-        "password": "pbkdf2_sha256$10000$dXIxx1LlUoj2$Gh9j0OFQjQpj2Oepg2NofCGCJk+gXPQsUKzGYKL2l7w=",
-        "email": "",
-        "date_joined": "2013-08-26T19:05:07Z"
-    }
+  "pk": 4, 
+  "model": "auth.user", 
+  "fields": {
+    "username": "Suzy-supervisor", 
+    "first_name": "", 
+    "last_name": "", 
+    "is_active": true, 
+    "is_superuser": false, 
+    "is_staff": true, 
+    "last_login": "2013-08-29T23:12:35.579Z", 
+    "groups": [], 
+    "user_permissions": [], 
+    "password": "pbkdf2_sha256$10000$tZR8aYea3Pqz$YsjgFiBFYng/Th4SggTEiZwbJ9heJub0aWeNN4LorxI=", 
+    "email": "", 
+    "date_joined": "2013-08-26T19:04:41Z"
+  }
 },
 {
-    "pk": 6,
-    "model": "auth.user",
-    "fields": {
-        "username": "Olga-user",
-        "first_name": "",
-        "last_name": "",
-        "is_active": true,
-        "is_superuser": false,
-        "is_staff": false,
-        "last_login": "2013-09-04T19:25:00.126Z",
-        "groups": [],
-        "user_permissions": [],
-        "password": "pbkdf2_sha256$10000$pbPAmmEKxGVY$uz3zHX5CvcwpCqGnFZRBWK3yDk385lm0CFujgsnwqtk=",
-        "email": "",
-        "date_joined": "2013-08-26T19:05:24.028Z"
-    }
+  "pk": 5, 
+  "model": "auth.user", 
+  "fields": {
+    "username": "Roy-reviewer", 
+    "first_name": "", 
+    "last_name": "", 
+    "is_active": true, 
+    "is_superuser": false, 
+    "is_staff": false, 
+    "last_login": "2013-08-26T19:05:07Z", 
+    "groups": [], 
+    "user_permissions": [], 
+    "password": "pbkdf2_sha256$10000$jhrqzN5IZgJ0$JEuGu3tLa1QdudIHdI0Aytl5C2OMiFjltzqij+hmPoc=", 
+    "email": "", 
+    "date_joined": "2013-08-26T19:05:07Z"
+  }
+},
+{
+  "pk": 6, 
+  "model": "auth.user", 
+  "fields": {
+    "username": "Olga-user", 
+    "first_name": "", 
+    "last_name": "", 
+    "is_active": true, 
+    "is_superuser": false, 
+    "is_staff": false, 
+    "last_login": "2013-09-04T19:25:00.126Z", 
+    "groups": [], 
+    "user_permissions": [], 
+    "password": "pbkdf2_sha256$10000$vBtLj7q0lPuj$lWmgEDMaIpP3BLh+ez3UabVO6S10e9+aRhx4BqGOF1Y=", 
+    "email": "", 
+    "date_joined": "2013-08-26T19:05:24.028Z"
+  }
 }
 ]
