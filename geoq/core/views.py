@@ -169,6 +169,19 @@ class AOIDelete(DeleteView):
     def get_success_url(self):
         return reverse('job-detail', args=[self.object.job.pk])
 
+class CreateProjectView(CreateView):
+    """
+    Create view that adds the user that created the job as a reviewer.
+    """
+
+    def form_valid(self, form):
+        """
+        If the form is valid, save the associated model and add the current user as a reviewer.
+        """
+        self.object = form.save()
+        self.object.supervisors.add(self.request.user)
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
 
 class CreateJobView(CreateView):
     """

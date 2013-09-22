@@ -22,10 +22,12 @@
 # LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-from django.test import TestCase
-from django.test import Client
-from django.core.urlresolvers import reverse
 
+from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
+from django.test import Client
+from django.test import TestCase
+from geoq.core.models import Project
 
 class CoreTest(TestCase):
     # TODO test requests to all views
@@ -41,6 +43,8 @@ class CoreTest(TestCase):
                            'job-create',
                            'aoi-create',
                           ]
+
+        self.admin, created = User.objects.get_or_create(username='admin', password='admin', is_superuser=True)
 
     def test_get_requests(self):
         """
@@ -133,3 +137,21 @@ class CoreTest(TestCase):
         """
 
         pass
+
+    def test_create_project_view(self):
+        """
+        Tests the create project view.
+        """
+
+        project = dict(name='Test project.', description="This is a test.", project_type='Fire')
+
+        c = Client()
+        c.login(username='admin', password='admin')
+        response = c.post(reverse('project-create'), data=project)
+        self.assertEqual(response.status_code, 201)
+
+        # Make sure the user that creates the job becomes a supervisor
+        proj = Project.objects.filter(name=project.get('name'))
+        self.assertTrue(self.admin in proj.supervisors)
+
+

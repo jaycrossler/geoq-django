@@ -27,7 +27,7 @@ from django.views.generic import CreateView, TemplateView, ListView, UpdateView
 from forms import AOIForm, JobForm, ProjectForm
 from models import AOI, Project, Job
 from views import BatchCreateAOIS, CreateFeaturesView, Dashboard, DetailedListView, JobDetailedListView, ChangeAOIStatus,\
-    JobDelete, AOIDelete, CreateJobView, redirect_to_unassigned_aoi
+    JobDelete, AOIDelete, CreateJobView,CreateProjectView, redirect_to_unassigned_aoi
 
 urlpatterns = patterns('',
     url(r'^$', Dashboard.as_view(), name='home'),
@@ -42,7 +42,7 @@ urlpatterns = patterns('',
         name='project-detail'),
 
     url(r'^projects/create/?$',
-        CreateView.as_view(form_class=ProjectForm,
+        CreateProjectView.as_view(form_class=ProjectForm,
                            template_name="core/generic_form.html"),
                            name='project-create'),
     url(r'^projects/update/(?P<pk>\d+)/?$',
