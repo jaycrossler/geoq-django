@@ -105,6 +105,20 @@ class CreateFeaturesView(DetailView):
         return cv
 
 
+def redirect_to_unassigned_aoi(request, pk):
+    """
+    Given a job, redirects the view to an unassigned AOI.  If there are no unassigned AOIs, the user will be redirected
+     to the job's absolute url.
+    """
+    job = get_object_or_404(Job, id=pk)
+
+    try:
+        return HttpResponseRedirect(job.aois.filter(status='Unassigned')[0].get_absolute_url(), status=200)
+    except IndexError:
+        return HttpResponseRedirect(job.get_absolute_url())
+
+
+
 class JobDetailedListView(ListView):
     """
     A mixture between a list view and detailed view.
