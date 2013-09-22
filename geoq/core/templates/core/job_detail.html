@@ -5,40 +5,56 @@
     {% leaflet_js %}
     <script src="{{ STATIC_URL }}core/js/leaflet_helper.js"></script>
     <script type="text/javascript">
-    function mapInit(map, bounds) {
+    
+        function mapInit(map, bounds) {
 
-        aoi_extents = L.geoJson({{ object.geoJSON|default:'[]'|safe }}, {
-            style: function(feature) {
-                switch (feature.properties.status){
-                    case 'Assigned': return leaflet_helper.styles.assigned;
-                    case 'Completed': return leaflet_helper.styles.completed;
-                    case 'In work' : return leaflet_helper.styles.in_work;
-                    case 'Unassigned' : return leaflet_helper.styles.extentStyle;
+            aoi_extents = L.geoJson({{ object.geoJSON|default:'[]'|safe }}, {
+                style: function(feature) {
+                    switch (feature.properties.status){
+                        case 'Assigned': return leaflet_helper.styles.assigned;
+                        case 'Completed': return leaflet_helper.styles.completed;
+                        case 'In work' : return leaflet_helper.styles.in_work;
+                        case 'Unassigned' : return leaflet_helper.styles.extentStyle;
+                    }
                 }
-            }
-            , onEachFeature: function(feature, layer) {
-                job_props = feature.properties;
-                popupString = '<div class="job-detail-popup">'
-                + '<h5><a href="' + job_props.absolute_url + '">AOI #'+ job_props.id.toString() + '</a></h5>'
-                + '<div><label>Priority: </label><span>' + job_props.priority + '</span></div>'
-                + '<div><label>Status: </label><span>' + job_props.status + '</span></div>'
-                + '<div><label>Analyst: </label><span>' + (job_props.analyst || 'Unassigned') + '</span></div>'
-                + '</div>'
-                ;
-                layer.bindPopup(popupString);
-            }
-        }).addTo(map);
+                , onEachFeature: function(feature, layer) {
 
-        // Map doesn't update without this delay.
-        setTimeout(function(){map.fitBounds(aoi_extents.getBounds())}, 1);
+                    job_properties = feature.properties;
+                    popupContent = _.template('{% filter escapejs %}{% include "core/job_detail_aoi_popup.html" %}{% endfilter %}', job_properties);
+                    layer.bindPopup(popupContent);
+
+                    layer.on({
+                        mouseover: highlightFeature,
+                        mouseout: resetHighlight
+                    });
+                }
+            }).addTo(map);
+
+            // Map doesn't update without this delay.
+            setTimeout(function(){map.fitBounds(aoi_extents.getBounds())}, 1);
 
 
-        var drawnItems = new L.FeatureGroup();
-		map.addLayer(drawnItems);
+            var drawnItems = new L.FeatureGroup();
+    		map.addLayer(drawnItems);
 
-    }
+        }
 
-</script>
+        function highlightFeature(e) {
+            var layer = e.target;
+            layer.setStyle({
+                color: 'darkgreen', 
+                weight: 3,
+                opacity: 1,
+                fillOpacity: 1,
+                fillColor: 'darkgreen'
+            });
+        }
+
+        function resetHighlight(e) {
+            aoi_extents.resetStyle(e.target);
+        }
+
+    </script>
 
     {% compress css %}
     {% leaflet_css %}
