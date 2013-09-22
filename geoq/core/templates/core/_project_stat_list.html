@@ -1,3 +1,5 @@
+{% load humanize %}
+
 <ul class="statlist pull-right">
     <li title="Contributors">
         <i class="icon-user"></i>
@@ -5,7 +7,7 @@
     </li>
     <li title="AOIs">
         <i class="icon-th"></i>
-        {{ object.aoi_count|default:0 }}
+        {{ object.aoi_count|default:0|intcomma }}
     </li>
     <li title="Jobs">
         <i class="icon-inbox"></i>

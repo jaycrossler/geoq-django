@@ -105,7 +105,7 @@
                 <div class="span4 thumbnail" id="map" style="height:225px; vertical-alignment:middle;">
                 {% leaflet_map "map" creatediv=False%}
                 </div>
-                <div class="span6">
+                <div class="span6" id="attribute-table">
                     <table>
                         <tr>
                             <th style="min-width: 100px"></th>
@@ -137,7 +137,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <b>Visibility:</b>
+                                <b>Private:</b>
                             </td>
                             <td>
                                 {{ object.project.private }}
@@ -152,8 +152,11 @@
                             </td>
                         </tr>
                     </table>
-
                 </div>
+
+            {% if object.unassigned_aois%}
+            <a href="{% url 'job-next-aoi' object.id%}" class="btn btn-large btn-success pull-right" style="margin-top:80px">Contribute to this job.  <i class="icon-long-arrow-right"></i></a>
+            {% endif %}
             </div>
 
             <div class="row body">

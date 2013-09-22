@@ -28,9 +28,9 @@ import requests
 from django.contrib.auth.models import User
 from django.contrib.gis.geos import GEOSGeometry
 from django.forms.util import ValidationError
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from django.views.generic import DetailView, ListView, TemplateView, View, DeleteView
+from django.views.generic import DetailView, ListView, TemplateView, View, DeleteView, CreateView
 from django.core.urlresolvers import reverse
 
 from teamwork.models import Team
@@ -101,9 +101,22 @@ class CreateFeaturesView(DetailView):
 
     def get_context_data(self, **kwargs):
         cv = super(CreateFeaturesView, self).get_context_data(**kwargs)
-        cv['layer'] = Layer.objects.all()[0]
-        cv['map'] = self.object.job.map #Map.objects.all()[0].map_layers_json()
+        cv['map'] = self.object.job.map
         return cv
+
+
+def redirect_to_unassigned_aoi(request, pk):
+    """
+    Given a job, redirects the view to an unassigned AOI.  If there are no unassigned AOIs, the user will be redirected
+     to the job's absolute url.
+    """
+    job = get_object_or_404(Job, id=pk)
+
+    try:
+        return HttpResponseRedirect(job.aois.filter(status='Unassigned')[0].get_absolute_url(), status=200)
+    except IndexError:
+        return HttpResponseRedirect(job.get_absolute_url())
+
 
 
 class JobDetailedListView(ListView):
@@ -143,6 +156,7 @@ class JobDetailedListView(ListView):
 
 class JobDelete(DeleteView):
     model = Job
+    template_name = "core/generic_confirm_delete.html"
 
     def get_success_url(self):
         return reverse('project-detail', args=[self.object.project.pk])
@@ -150,9 +164,25 @@ class JobDelete(DeleteView):
 
 class AOIDelete(DeleteView):
     model = AOI
+    template_name = "core/generic_confirm_delete.html"
 
     def get_success_url(self):
         return reverse('job-detail', args=[self.object.job.pk])
+
+
+class CreateJobView(CreateView):
+    """
+    Create view that adds the user that created the job as a reviewer.
+    """
+
+    def form_valid(self, form):
+        """
+        If the form is valid, save the associated model and add the current user as a reviewer.
+        """
+        self.object = form.save()
+        self.object.reviewers.add(self.request.user)
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class ChangeAOIStatus(View):

@@ -140,9 +140,16 @@ class Job(GeoQBase):
     def user_count(self):
         return self.analysts.count()
 
+    def unassigned_aois(self):
+        """
+        Returns the unassigned AOIs.
+        """
+        return self.aois.filter(status='Unassigned')
+
+
     def complete(self):
         """
-        Returns the percentage of completed AOIs.
+        Returns the completed AOIs.
         """
         return self.aois.filter(status='Completed')
 

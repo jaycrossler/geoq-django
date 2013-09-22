@@ -26,7 +26,8 @@ from django.conf.urls import patterns, url
 from django.views.generic import CreateView, TemplateView, ListView, UpdateView
 from forms import AOIForm, JobForm, ProjectForm
 from models import AOI, Project, Job
-from views import BatchCreateAOIS, CreateFeaturesView, Dashboard, DetailedListView, JobDetailedListView, ChangeAOIStatus, JobDelete, AOIDelete
+from views import BatchCreateAOIS, CreateFeaturesView, Dashboard, DetailedListView, JobDetailedListView, ChangeAOIStatus,\
+    JobDelete, AOIDelete, CreateJobView, redirect_to_unassigned_aoi
 
 urlpatterns = patterns('',
     url(r'^$', Dashboard.as_view(), name='home'),
@@ -55,8 +56,9 @@ urlpatterns = patterns('',
     url(r'^jobs/(?P<pk>\d+)/(?P<status>[a-zA-Z_ ]+)?/?$',
         JobDetailedListView.as_view(template_name='core/job_detail.html'),
         name='job-detail'),
+    url(r'^jobs/(?P<pk>\d+)/next-aoi', redirect_to_unassigned_aoi, name='job-next-aoi'),
     url(r'^jobs/create/?$',
-        CreateView.as_view(queryset=Job.objects.all(),
+        CreateJobView.as_view(queryset=Job.objects.all(),
                            template_name='core/generic_form.html',
                            form_class=JobForm),
         name='job-create'),
