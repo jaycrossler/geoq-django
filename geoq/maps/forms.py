@@ -30,7 +30,7 @@ from models import Feature, FeatureType, Map, Layer, MapLayer
 class FeatureForm(StyledModelForm):
     class Meta:
         model = Feature
-        exlcuded_fields = ("aoi")
+        excluded_fields = ("aoi")
 
 
 class FeatureTypeForm(StyledModelForm):
