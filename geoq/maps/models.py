@@ -29,6 +29,7 @@ from django.contrib.auth.models import User
 from django.contrib.gis.db import models
 from django.core.exceptions import ValidationError
 from django.utils.datastructures import SortedDict
+from django.core.urlresolvers import reverse
 from jsonfield import JSONField
 
 IMAGE_FORMATS = (
@@ -227,6 +228,9 @@ class Map(models.Model):
             "layers": self.map_layers_json()
         })
 
+    def get_absolute_url(self):
+        return reverse('map-update', args=[self.id])
+
 
 class MapLayer(models.Model):
     """
@@ -317,6 +321,12 @@ class FeatureType(models.Model):
                                name=self.name,
                                type=self.type,
                                style=self.style))
+
+    def featuretypes(self):
+        return FeatureType.objects.all()
+
+    def get_absolute_url(self):
+        return reverse('feature-type-update', args=[self.id])
 
     def __unicode__(self):
         return self.name

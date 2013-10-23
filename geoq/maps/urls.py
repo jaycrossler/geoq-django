@@ -23,15 +23,20 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 from django.conf.urls import patterns, url
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, ListView
 from forms import FeatureTypeForm, MapForm, LayerForm, MapLayerForm
-from views import CreateFeatures, create_map
+from views import CreateFeatures, create_map, FeatureTypeListView, FeatureTypeDelete, MapListView, MapDelete
+from models import FeatureType, Map
 
 urlpatterns = patterns('',
 
     url(r'^features/create/?$',
         CreateFeatures.as_view(),
         name='feature-create'),
+
+    url(r'^feature-types/?$',
+        FeatureTypeListView.as_view(queryset=FeatureType.objects.all()),
+                         name='feature-type-list'),
 
     url(r'^feature-types/create/?',
         CreateView.as_view(template_name='core/generic_form.html',
@@ -43,6 +48,19 @@ urlpatterns = patterns('',
                            queryset=FeatureTypeForm.Meta.model.objects.all(),
                            form_class=FeatureTypeForm),
         name='feature-type-update'),
+
+    url(r'^feature-types/delete/(?P<pk>\d+)/?$',
+        FeatureTypeDelete.as_view(),
+        name='feature-type-delete'),
+
+    # Map list
+    url(r'^maps/?$', MapListView.as_view(queryset=Map.objects.all()),
+                                              name='map-list'),
+
+    url(r'^maps/delete/(?P<pk>\d+)/?$',
+        MapDelete.as_view(),
+        name='map-delete'),
+
 
     # Map CRUD Views
     url(r'^create/?$',
