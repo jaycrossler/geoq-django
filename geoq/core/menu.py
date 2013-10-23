@@ -40,9 +40,9 @@ def menu(active=None, request_path=None):
         }
 
     maps_dropdown = {
-        'New Map':  {'index': 1, 'url': reverse_lazy('map-create'), 'active': False},
+        'Maps':  {'index': 1, 'url': reverse_lazy('map-list'), 'active': False},
         'New Layer':  {'index': 2, 'url': reverse_lazy('layer-create'), 'active': False},
-        'New Feature Type':  {'index': 2, 'url': reverse_lazy('feature-type-create'), 'active': False}
+        'Feature Types':  {'index': 2, 'url': reverse_lazy('feature-type-list'), 'active': False}
     }
 
     menu_items = {
