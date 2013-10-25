@@ -39,4 +39,8 @@ class UserPermsMiddleware(object):
 		#print perms
 
 		request.base_perms = set(perms)
+
+		import logging
+		logging.info(request.base_perms)
+
 		return None
