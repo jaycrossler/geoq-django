@@ -14,6 +14,29 @@ aoi_feature_edit.init = function(aoi_id, aoi_map_json, aoi_extent, job_features_
     aoi_feature_edit.feature_types = feature_types;
     aoi_feature_edit.create_feature_url = create_feature_url;
     aoi_feature_edit.drawcontrol = null;
+    aoi_feature_edit.featureLayers = [];
+
+/*    for( var i = 1; i <= aoi_feature_edit.feature_types.length; i++) {
+        aoi_feature_edit.featureLayers[i] = L.geoJson( null,
+            {style: function(feature){
+                feature_type = aoi_feature_edit.feature_types[feature.properties.template];
+                if (feature_type && feature_type.hasOwnProperty("style")){
+                    return feature_type.style;
+            };
+        }});
+    }*/
+
+    _.each(aoi_feature_edit.feature_types, function(ftype) {
+        var featureLayer = L.geoJson( null,
+            {style: function(ftype){
+                feature_type = aoi_feature_edit.feature_types[ftype.properties.template];
+                if (feature_type && feature_type.hasOwnProperty("style")){
+                    return feature_type.style;
+                };
+            }}
+        );
+        aoi_feature_edit.featureLayers[ftype.id] = featureLayer;
+    });
 }
 
 aoi_feature_edit.get_feature_type = function(i){
@@ -44,7 +67,7 @@ aoi_feature_edit.map_init = function(map, bounds){
         });
     }
 
-    L.control.layers(baseLayers, layerSwitcher).addTo(aoi_feature_edit.map);
+    layercontrol = L.control.layers(baseLayers, layerSwitcher).addTo(aoi_feature_edit.map);
 
     aoi_extents=L.geoJson(aoi_feature_edit.aoi_extents_geojson,
             {style: leaflet_helper.styles.extentStyle,
@@ -53,15 +76,40 @@ aoi_feature_edit.map_init = function(map, bounds){
 
     aoi_extents.addTo(aoi_feature_edit.map);
 
-    features = L.geoJson(aoi_feature_edit.job_features_geojson,
-            {style: function(feature){
-                feature_type = aoi_feature_edit.feature_types[feature.properties.template];
-                if (feature_type && feature_type.hasOwnProperty("style")){
-                  return feature_type.style;
-                };
-            }
+    // for each feature template, add features to map and layer control
+    _.each(aoi_feature_edit.feature_types, function(ftype) {
+        var tnum = ftype.id;
+        var featuretype = ftype.type;
+        var featureCollection = aoi_feature_edit.createFeatureCollection(tnum);
 
-            }).addTo(aoi_feature_edit.map);
+        _.each(aoi_feature_edit.job_features_geojson.features, function(feature) {
+            if ( feature.properties.template == tnum && feature.geometry.type == featuretype) {
+                featureCollection.features.push(feature);
+            }
+        });
+
+        aoi_feature_edit.featureLayers[tnum].addData(featureCollection);
+        aoi_feature_edit.featureLayers[tnum].addTo(aoi_feature_edit.map);
+        layercontrol.addOverlay(aoi_feature_edit.featureLayers[tnum], aoi_feature_edit.feature_types[tnum].name);
+    });
+
+    // add one for points
+    var pointcollection = _.filter(aoi_feature_edit.job_features_geojson.features, function(feature) {
+         return feature.geometry.type == "Point";
+    });
+
+    if ( pointcollection.length > 0 ) {
+        var fid = aoi_feature_edit.featureLayers.length + 1;
+        var featureCollection = aoi_feature_edit.createFeatureCollection(fid);
+
+        for ( var i = 0; i < pointcollection.length; i++ ) {
+            featureCollection.features.push(pointcollection[i]);
+        }
+
+        aoi_feature_edit.featureLayers[fid] = L.geoJson(featureCollection);
+        aoi_feature_edit.featureLayers[fid].addTo(aoi_feature_edit.map);
+        layercontrol.addOverlay(aoi_feature_edit.featureLayers[fid], "Points");
+    }
 
     setTimeout(function(){aoi_feature_edit.map.fitBounds(aoi_extents.getBounds())}, 1);
 
@@ -158,6 +206,16 @@ aoi_feature_edit.filterDrawConsole = function(){
 aoi_feature_edit.addOptions=function(feature, div){
     t = _.template("<option value='{{id}}'>{{name}}</option>")
     $("#"+div).append(t(feature));
+}
+
+aoi_feature_edit.createFeatureCollection=function(id) {
+    var featureCollection = {};
+    featureCollection.type = "FeatureCollection";
+    featureCollection.features = [];
+    featureCollection.properties = {};
+    featureCollection.properties.id = id;
+
+    return featureCollection;
 }
 
 
