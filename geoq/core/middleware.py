@@ -34,15 +34,6 @@ class UserPermsMiddleware(object):
 		user = request.user
 		perms = []
 
-		# Add object permissions
-
-		# try:
-		# 	obj_perms = user.userobjectpermission_set.all()
-		# 	perms = list('.'.join([o.content_type.app_label, o.codename]) for o in obj_perms) + perms
-		# except AttributeError:
-		# 	# 'AnonymousUser' object has no attribute 'userobjectpermission_set'
-		# 	pass
-		# Add user permissions
 		perms = list(user.get_all_permissions()) + perms
 
 		#print perms
