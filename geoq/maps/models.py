@@ -317,7 +317,7 @@ class FeatureType(models.Model):
 
     def to_json(self):
         return json.dumps(dict(id=self.id,
-                               propeties=self.properties,
+                               properties=self.properties,
                                name=self.name,
                                type=self.type,
                                style=self.style))
