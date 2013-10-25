@@ -74,7 +74,10 @@ class Project(GeoQBase):
 
     project_type = models.CharField(max_length=50, choices=PROJECT_TYPES)
     private = models.BooleanField(default=False, help_text='Make this project available to all users.')
-    supervisors = models.ManyToManyField(User, blank=True, null=True, related_name="supervisors")
+    project_admins = models.ManyToManyField(User, blank=True, null=True,
+        related_name="project_admins", help_text='User that has admin rights to project.')
+    contributors = models.ManyToManyField(User, blank=True, null=True,
+        related_name="contributors", help_text='User that will be able to take on jobs.')
 
     @property
     def jobs(self):
