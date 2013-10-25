@@ -11,10 +11,10 @@
 # 'This software (GeoQ or Geographic Work Queueing and Tasking System)
 # is provided to the public as a courtesy of the National
 # Geospatial-Intelligence Agency.
-#  
+#
 # The above copyright notice and this permission notice shall be
 # included in all copies or substantial portions of the Software.
-#  
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 # EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 # MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,8 +32,6 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, ListView, TemplateView, View, DeleteView, CreateView
 from django.core.urlresolvers import reverse
-
-from teamwork.models import Team
 
 from models import Project, Job, AOI
 from maps.models import Layer, Map

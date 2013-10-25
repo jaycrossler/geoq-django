@@ -175,9 +175,17 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     #'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'geoq.core.middleware.UserPermsMiddleware',             # works w/ teamwork
-    'stronghold.middleware.LoginRequiredMiddleware',        # works w/ stronghold
+    'geoq.core.middleware.UserPermsMiddleware',             # works w/ guardian
+    #'stronghold.middleware.LoginRequiredMiddleware',        # works w/ stronghold
 )
+
+# django-guardian
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend', # default
+    'guardian.backends.ObjectPermissionBackend',
+)
+ANONYMOUS_USER_ID = -1
+# /django-guardian
 
 ROOT_URLCONF = 'geoq.urls'
 
@@ -213,8 +221,9 @@ INSTALLED_APPS = (
     'leaflet',
     'maps',
     'jsonfield',
-    'teamwork',     # sets up teams, rolls, & policy for permissions
-    'stronghold',   # sets default to require auth
+    #'teamwork',     # sets up teams, rolls, & policy for permissions
+    #'stronghold',   # sets default to require auth
+    'guardian',
 )
 
 # A sample logging configuration. The only tangible logging
