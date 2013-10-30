@@ -41,7 +41,7 @@ class AOIAdmin(ObjectAdmin):
 
     class NameInputForm(forms.Form):
         _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)
-        name_field = forms.CharField(max_length=50)
+        name_field = forms.CharField(max_length=200, required=True, label="AOI Name")
 
     def rename_aois(self, request, queryset):
         form = None
