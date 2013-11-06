@@ -239,6 +239,9 @@ LOGGING = {
     }
 }
 
+# Set default login location
+LOGIN_REDIRECT_URL = '/'
+
 
 # Override production settings with local settings if they exist
 try:
