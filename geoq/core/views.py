@@ -74,7 +74,8 @@ class BatchCreateAOIS(TemplateView):
                                             description=job.description,
                                             polygon=GEOSGeometry(json.dumps(aoi.get('geometry')))) for aoi in aois])
 
-        return HttpResponse([aoi.geoJSON() for aoi in response], mimetype="application/json")
+        return HttpResponse()
+
 
 
 #TODO: Abstract this
@@ -237,3 +238,20 @@ def usng(request):
     params['srsName'] = 'EPSG:4326'
     resp = requests.get(base_url, params=params)
     return HttpResponse(resp, mimetype="application/json")
+
+def batch_create_aois(request, *args, **kwargs):
+        aois = request.POST.get('aois')
+        job = Job.objects.get(id=kwargs.get('job_pk'))
+
+        try:
+            aois = json.loads(aois)
+        except ValueError:
+            raise ValidationError(_("Enter valid JSON"))
+
+
+        response = AOI.objects.bulk_create([AOI(name=(aoi.get('name')),
+                                            job=job,
+                                            description=job.description,
+                                            polygon=GEOSGeometry(json.dumps(aoi.get('geometry')))) for aoi in aois])
+
+        return HttpResponse()

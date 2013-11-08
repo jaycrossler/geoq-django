@@ -91,7 +91,7 @@
                     </button>
                     <ul class="dropdown-menu">
                         {% if 'core.add_job' in request.base_perms %}
-                        <li><a href="{% url 'job-batch-create-aois' object.id%}">Add AOIs</a></li>
+                        <li><a href="{% url 'job-create-aois' object.id%}">Add AOIs</a></li>
                         {% endif %}
                         {% if 'core.delete_job' in request.base_perms %}
                         <li><a href="{% url 'job-delete' object.id %}">Delete Job</a></li>

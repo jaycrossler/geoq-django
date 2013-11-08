@@ -205,6 +205,9 @@ class AOI(GeoQBase):
         Returns geoJSON of the feature.
         """
 
+        if (self.id == None):
+            self.id = 1
+
         geojson = SortedDict()
         geojson["type"] = "Feature"
         geojson["properties"] = dict(id=self.id, status=self.status, analyst=(self.analyst if self.analyst is not None else 'Unassigned'), priority=self.priority, absolute_url=reverse('aoi-work', args=[self.id]))

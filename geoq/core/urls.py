@@ -70,9 +70,11 @@ urlpatterns = patterns('',
     url(r'^jobs/delete/(?P<pk>\d+)/?$',
         JobDelete.as_view(),
         name='job-delete'),
-    url(r'^jobs/(?P<job_pk>\d+)/batch-create-aois/?$',
+    url(r'^jobs/(?P<job_pk>\d+)/create-aois/?$',
         BatchCreateAOIS.as_view(),
-        name='job-batch-create-aois'),
+        name='job-create-aois'),
+    url(r'^jobs/(?P<job_pk>\d+)/batch-create-aois/?$',
+        'core.views.batch_create_aois', name='job-batch-create-aois'),
 
     # AOIS
     url(r'^aois/work/(?P<pk>\d+)/?$', CreateFeaturesView.as_view(), name='aoi-work'),

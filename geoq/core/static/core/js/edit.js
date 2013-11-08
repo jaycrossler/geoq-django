@@ -15,6 +15,7 @@ aoi_feature_edit.init = function(aoi_id, aoi_map_json, aoi_extent, job_features_
     aoi_feature_edit.create_feature_url = create_feature_url;
     aoi_feature_edit.drawcontrol = null;
     aoi_feature_edit.featureLayers = [];
+    aoi_feature_edit.icons = [];
 
 /*    for( var i = 1; i <= aoi_feature_edit.feature_types.length; i++) {
         aoi_feature_edit.featureLayers[i] = L.geoJson( null,
@@ -50,6 +51,10 @@ aoi_feature_edit.map_init = function(map, bounds){
     var baseLayers = {}
     var layerSwitcher = {};
     //var editableLayers = new L.FeatureGroup();
+    // Only layer in here should be base OSM layer
+    _.each(aoi_feature_edit.map._layers, function(l){
+        baseLayers["OpenStreetMap"]=l;
+    });
 
     if (custom_map.hasOwnProperty("layers")){
         _.each(custom_map.layers, function(l){
@@ -94,22 +99,22 @@ aoi_feature_edit.map_init = function(map, bounds){
     });
 
     // add one for points
-    var pointcollection = _.filter(aoi_feature_edit.job_features_geojson.features, function(feature) {
-         return feature.geometry.type == "Point";
-    });
-
-    if ( pointcollection.length > 0 ) {
-        var fid = aoi_feature_edit.featureLayers.length + 1;
-        var featureCollection = aoi_feature_edit.createFeatureCollection(fid);
-
-        for ( var i = 0; i < pointcollection.length; i++ ) {
-            featureCollection.features.push(pointcollection[i]);
-        }
-
-        aoi_feature_edit.featureLayers[fid] = L.geoJson(featureCollection);
-        aoi_feature_edit.featureLayers[fid].addTo(aoi_feature_edit.map);
-        layercontrol.addOverlay(aoi_feature_edit.featureLayers[fid], "Points");
-    }
+//    var pointcollection = _.filter(aoi_feature_edit.job_features_geojson.features, function(feature) {
+//         return feature.geometry.type == "Point";
+//    });
+//
+//    if ( pointcollection.length > 0 ) {
+//        var fid = aoi_feature_edit.featureLayers.length + 1;
+//        var featureCollection = aoi_feature_edit.createFeatureCollection(fid);
+//
+//        for ( var i = 0; i < pointcollection.length; i++ ) {
+//            featureCollection.features.push(pointcollection[i]);
+//        }
+//
+//        aoi_feature_edit.featureLayers[fid] = L.geoJson(featureCollection);
+//        aoi_feature_edit.featureLayers[fid].addTo(aoi_feature_edit.map);
+//        layercontrol.addOverlay(aoi_feature_edit.featureLayers[fid], "Points");
+//    }
 
     setTimeout(function(){aoi_feature_edit.map.fitBounds(aoi_extents.getBounds())}, 1);
 

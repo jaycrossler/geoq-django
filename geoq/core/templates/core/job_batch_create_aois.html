@@ -97,29 +97,28 @@
         $("#save-aois-button").on('click',function(e){
             boundaries = [];
             // this doesn't need to be a filter
-            _.filter(window.maps, function(m){
+            var m = aois._map;
+            if (m) {
                 if (m._container.id == 'map'){
                    if (m.hasLayer(aois)){
                        _.each(aois.getLayers(), function(l){
-                           new_aois = JSON.stringify(l.toGeoJSON());
 
                            _.each(l.getLayers(), function(f){
-                                boundaries.push(f.toGeoJSON());
+                               f.feature.name = $('#aoi-name').val();
+                               boundaries.push(f.toGeoJSON());
                            });
                        })
 
-                       $.ajax({
-                          type: "POST",
-                          url: "{% url 'job-batch-create-aois' job_pk%}",
-                          data: { aois: JSON.stringify(boundaries), csrftoken:geoq.csrftoken},
-                          //contentType: "application/json",
-                          success: alert,
-                          dataType: "json"
-                        });
+                       $.post("{% url 'job-batch-create-aois' job_pk %}",
+                               { aois: JSON.stringify(boundaries), csrftoken:geoq.csrftoken},
+                               function(data, textStatus, xhr) {
+                                   console.log("Got response: " + textStatus);
+                                   window.location.href = "{% url 'job-detail' job_pk %}";
+                               });
 
                    }
                }
-            });
+            }
             })
         });
 
@@ -134,9 +133,14 @@
 
 {% block container %}
     <div class="row-fluid container-narrow">
-    <h2>Batch create new AOIS (currently US only).</h2>
+    <h2>Create new AOIS (currently US only).</h2>
     <div id="map" class="thumbnail" style="height: 450px; width: 100%;">{% leaflet_map "map" %}</div>
+    <div class="row">
+        <label>AOI Name</label>
+        <input type="text" name="aoi-name" id="aoi-name" value="{{ object.name }}"/>
+    </div>
+    <div class="row">
     <btn id="save-aois-button" class="btn btn-success">Save AOIs</btn>
-
+    </div>
     </div>
 {% endblock %}
