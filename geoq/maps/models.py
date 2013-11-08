@@ -141,6 +141,9 @@ class Layer(models.Model):
 
         return urls
 
+    def get_absolute_url(self):
+        return reverse('layer-update', args=[self.id])
+
     def get_layer_params(self):
         """
         Converts a layer's parameters to json.

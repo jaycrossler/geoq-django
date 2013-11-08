@@ -33,7 +33,7 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.views.generic import CreateView, DetailView, ListView, TemplateView, UpdateView, View, DeleteView
 from forms import MapForm, MapInlineFormset
-from models import Feature, FeatureType, Map
+from models import Feature, FeatureType, Map, Layer
 import logging
 
 logger = logging.getLogger(__name__)
@@ -133,3 +133,19 @@ class FeatureTypeDelete(DeleteView):
 
     def get_success_url(self):
         return reverse('feature-type-update')
+
+
+class LayerListView(ListView):
+
+    model = Layer
+
+    def get_context_data(self, **kwargs):
+        context = super(LayerListView, self).get_context_data(**kwargs)
+        return context
+
+class LayerDelete(DeleteView):
+    model = Layer
+    template_name = "core/generic_confirm_delete.html"
+
+    def get_success_url(self):
+        return reverse('layer-update')

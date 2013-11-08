@@ -25,8 +25,8 @@
 from django.conf.urls import patterns, url
 from django.views.generic import CreateView, UpdateView, ListView
 from forms import FeatureTypeForm, MapForm, LayerForm, MapLayerForm
-from views import CreateFeatures, create_map, FeatureTypeListView, FeatureTypeDelete, MapListView, MapDelete
-from models import FeatureType, Map
+from views import CreateFeatures, create_map, FeatureTypeListView, FeatureTypeDelete, MapListView, MapDelete, LayerListView, LayerDelete
+from models import FeatureType, Map, Layer
 
 urlpatterns = patterns('',
 
@@ -74,6 +74,10 @@ urlpatterns = patterns('',
         name='map-update'),
 
     # Layer CRUD Views
+    url(r'^layers/?$',
+        LayerListView.as_view(queryset=Layer.objects.all()),
+                         name='layer-list'),
+
     url(r'^layers/create/?$',
         CreateView.as_view(template_name='core/generic_form.html', form_class=LayerForm),
         name='layer-create'),
@@ -83,6 +87,10 @@ urlpatterns = patterns('',
                            queryset=LayerForm.Meta.model.objects.all(),
                            form_class=LayerForm),
         name='layer-update'),
+
+    url(r'^layers/delete/(?P<pk>\d+)/?$',
+        LayerDelete.as_view(),
+        name='layer-delete'),
 
     # MapLayer CRUD Views
     url(r'^map-layers/create/?$',

@@ -41,7 +41,7 @@ def menu(active=None, request_path=None):
 
     maps_dropdown = {
         'Maps':  {'index': 1, 'url': reverse_lazy('map-list'), 'active': False},
-        'New Layer':  {'index': 2, 'url': reverse_lazy('layer-create'), 'active': False},
+        'Layers':  {'index': 2, 'url': reverse_lazy('layer-list'), 'active': False},
         'Feature Types':  {'index': 2, 'url': reverse_lazy('feature-type-list'), 'active': False}
     }
 
