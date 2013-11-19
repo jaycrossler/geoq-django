@@ -29,7 +29,7 @@ SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+TEMPLATE_DEBUG = True
 
 ADMINS = (
     ('Admin User', 'admin@domain.com'),
@@ -42,12 +42,14 @@ DATABASES = {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'geoq_django',  # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-        'USER': 'admin',
-        'PASSWORD': 'admin',
+        'USER': 'geoq_user',
+        'PASSWORD': '0NYCEVaBl1OXx8NTjy5A',
         'HOST': 'localhost',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '5432',  # Set to empty string for default.
     }
 }
+
+AUTH_PROFILE_MODULE = 'core.UserProfile'
 
 # Use this to change the base bootstrap library
 #BOOTSTRAP_BASE_URL = None
@@ -81,12 +83,12 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = '/opt/src/pyenv/geoq/geoq-django'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://example.com/media/", "http://media.example.com/"
-MEDIA_URL = ''
+MEDIA_URL = '/images/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -196,6 +198,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'django.contrib.humanize',
     'compressor',
     'geoexplorer',
     'reversion',
@@ -208,6 +211,7 @@ INSTALLED_APPS = (
     'jsonfield',
     'teamwork',     # sets up teams, rolls, & policy for permissions
     'stronghold',   # sets default to require auth
+    'badges', # django badges
 )
 
 # A sample logging configuration. The only tangible logging
