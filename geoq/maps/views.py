@@ -22,6 +22,7 @@
 # LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 import json
 import requests
 from core.models import AOI
@@ -148,4 +149,4 @@ class LayerDelete(DeleteView):
     template_name = "core/generic_confirm_delete.html"
 
     def get_success_url(self):
-        return reverse('layer-update')
+        return reverse('layer-list')
