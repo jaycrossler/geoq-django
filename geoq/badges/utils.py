@@ -32,7 +32,7 @@ def badge_count(user_or_qs=None):
     badge_counts = BadgeToUser.objects.all()
     if isinstance(user_or_qs, User):
         badge_counts = badge_counts.filter(user=user_or_qs)
-    elif isinstance(user_or_qs, models.QuerySet):
+    elif isinstance(user_or_qs, models.query.QuerySet):
         badge_counts = badge_counts.filter(user__in=user_or_qs)
 
     badge_counts = badge_counts.values('badge__level')
