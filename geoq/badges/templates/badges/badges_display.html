@@ -14,10 +14,12 @@
 
 {% load badges_tags %}
 <span class="badge">
-<span>{{request.user.get_profile.score}}</span>
+<!-- span>{{request.user.get_profile.score}}</span -->
+{% if request.user %}
 {% for level in request.user|badge_count %}
 	{% if level.count %}
-		<span title="{{level.count}} {{level.badge__level|level_title}} badge{{level.count|pluralize}}"><span class="level_{{level.badge__level}} metal">●</span>{{level.count}}</span>
+		<span title="{{level.count}} {{level.badge__level|level_title}} badge{{level.count|pluralize}}"><span class="level_{{level.badge__level}} metal"><img src="{{ level.badge__level|level_icon }}"></span>{{level.count}}</span>
 	{% endif %}
 {% endfor %}
+{% endif %}
 </span>
