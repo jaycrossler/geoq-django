@@ -207,6 +207,7 @@ class ChangeAOIStatus(View):
         status = self.kwargs.get('status')
 
         if aoi.user_can_complete(request.user):
+            aoi.analyst_id = request.user.id
             aoi.status = status
             aoi.save()
             return HttpResponse(json.dumps({aoi.id: aoi.status}), mimetype="application/json")
