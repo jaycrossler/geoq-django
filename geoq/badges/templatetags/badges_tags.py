@@ -1,6 +1,6 @@
 from django.template import Library
 from badges.utils import badge_count
-from badges.models import LEVEL_CHOICES
+from badges.models import LEVEL_CHOICES, Badge
 level_choices = dict(LEVEL_CHOICES)
 
 register = Library()
@@ -45,3 +45,8 @@ def is_in_progress(badge, user):
 def progress_percentage(badge, user):
     prog = badge.meta_badge.get_progress_percentage(user=user)
     return max(min(prog, 100), 0)
+
+@register.filter
+def level_icon(level):
+    badge = Badge.objects.get(level=level)
+    return badge.icon.url
