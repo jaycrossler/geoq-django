@@ -22,3 +22,20 @@ Possible extensions:
 
 4) Django-badges has the ability to map images to different badges but they aren't being shown at the moment (this looks like I just need to find / write the css for metal and/or medal classes)
 
+
+11/19/2013: Installation Notes
+
+Here's a couple of things I needed to do when I installed the badging stuff into the baseline:
+
+- When doing a 'paver sync' to update the database, I was getting an error that the system couldn't find the badges_badge table.
+This is due to the fact that the table isn't there yet, but is reference in core/models.py (by the addition of the meta_badges.py
+file). What I needed to do is comment out the last line in core/models.py ("from meta_badges import *"), update the database,
+then re-enable that line again.
+
+- A new table (UserProfile) was added to track badge points. This should be created when new users are added to the system,
+but records may need to be added for existing users
+
+- In the settings.py file, I updated MEDIA_ROOT and MEDIA_URL variables so that the badge images could be served out if
+running geoq-django from the command line (paver start_django). A 'static' url was also added to the top-level urls.py
+file. If you're running geoq-django on a wsgi server, you won't need these as you'll likely have an image directory
+setup there. This means you'll also make a change to the entries in the badges_badge db table for the icon path
