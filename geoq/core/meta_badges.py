@@ -20,7 +20,7 @@ class AOICompleter(badges.MetaBadge):
 
 
 class MultiJobCompleter(badges.MetaBadge):
-    id = "multijobcompleter"
+    id = "MultiJobCompleter"
     model = AOI
     one_time_only = True
     title = "MultiJobCompleter"
