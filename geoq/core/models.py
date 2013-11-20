@@ -11,10 +11,10 @@
 # 'This software (GeoQ or Geographic Work Queueing and Tasking System)
 # is provided to the public as a courtesy of the National
 # Geospatial-Intelligence Agency.
-#  
+#
 # The above copyright notice and this permission notice shall be
 # included in all copies or substantial portions of the Software.
-#  
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 # EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 # MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -228,19 +228,21 @@ class AOI(GeoQBase):
         verbose_name_plural = 'Areas of Interest'
 
 
-class UserProfile(models.Model):  
+class UserProfile(models.Model):
     """ from http://stackoverflow.com/questions/44109/extending-the-user-model-with-custom-fields-in-django; this is one mechanism for adding extra details (currently score for badges) to the User model """
     defaultScore = 1
-    user = models.OneToOneField(User)  
+    user = models.OneToOneField(User)
     score = models.IntegerField(default=defaultScore)
 
-    def __str__(self):  
-          return "%s's profile" % self.user  
+    def __str__(self):
+          return "%s's profile" % self.user
 
-def create_user_profile(sender, instance, created, **kwargs):  
-    if created:  
-       profile, created = UserProfile.objects.get_or_create(user=instance)  
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+       profile, created = UserProfile.objects.get_or_create(user=instance)
 
 post_save.connect(create_user_profile, sender=User)
 
-from meta_badges import *
+import sys
+if not 'syncdb' in sys.argv[1:2] and not 'migrate' in sys.argv[1:2]:
+    from meta_badges import *
