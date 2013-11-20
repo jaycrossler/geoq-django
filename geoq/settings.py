@@ -11,10 +11,10 @@
 # 'This software (GeoQ or Geographic Work Queueing and Tasking System)
 # is provided to the public as a courtesy of the National
 # Geospatial-Intelligence Agency.
-#  
+#
 # The above copyright notice and this permission notice shall be
 # included in all copies or substantial portions of the Software.
-#  
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 # EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 # MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -199,19 +199,22 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.humanize',
+
+    'south',
+    'badges', # django badges
+
     'compressor',
     'geoexplorer',
     'reversion',
-    'south',
     'bootstrap_toolkit',
     'django_select2',
+
     'core',
     'leaflet',
     'maps',
     'jsonfield',
     'teamwork',     # sets up teams, rolls, & policy for permissions
     'stronghold',   # sets default to require auth
-    'badges', # django badges
 )
 
 # A sample logging configuration. The only tangible logging

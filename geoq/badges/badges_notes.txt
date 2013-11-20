@@ -27,11 +27,6 @@ Possible extensions:
 
 Here's a couple of things I needed to do when I installed the badging stuff into the baseline:
 
-- When doing a 'paver sync' to update the database, I was getting an error that the system couldn't find the badges_badge table.
-This is due to the fact that the table isn't there yet, but is referenced in core/models.py (by the addition of the meta_badges.py
-file). What I needed to do is comment out the last line in core/models.py ("from meta_badges import *"), update the database,
-then re-enable that line again.
-
 - A new table (UserProfile) was added to track badge points. This should be created when new users are added to the system,
 but records may need to be added for existing users
 
