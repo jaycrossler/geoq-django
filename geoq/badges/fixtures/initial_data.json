@@ -1,0 +1,18 @@
+[
+{
+    "pk": "AOICompleter", 
+    "model": "badges.badge", 
+    "fields": {
+        "icon": "badge_images/bronze.png", 
+        "level": "1"
+    }
+},
+{
+    "pk": "MultiJobCompleter", 
+    "model": "badges.badge", 
+    "fields": {
+        "icon": "badge_images/silver.png", 
+        "level": "2"
+    }
+}
+]

@@ -11,10 +11,10 @@
 # 'This software (GeoQ or Geographic Work Queueing and Tasking System)
 # is provided to the public as a courtesy of the National
 # Geospatial-Intelligence Agency.
-#  
+#
 # The above copyright notice and this permission notice shall be
 # included in all copies or substantial portions of the Software.
-#  
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 # EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 # MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -63,6 +63,7 @@ def install_dev_fixtures():
         'geoq/fixtures/initial_data.json',  # Users and site-wide data
         'geoq/core/fixtures/initial_data.json',  # Core
         'geoq/maps/fixtures/initial_data.json',  # Maps
+        'geoq/badges/fixtures/initial_data.json', # Badge icon data to load
         ]
 
     for fixture in fixtures:
