@@ -28,13 +28,8 @@ from django.contrib.gis import admin
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django import forms
-<<<<<<< HEAD
 from models import Project, Job, AOI, UserProfile
-=======
-from models import Project, Job, AOI
 from guardian.admin import GuardedModelAdmin
->>>>>>> Initial guardian update.
-
 
 
 class ObjectAdmin(admin.OSMGeoAdmin, reversion.VersionAdmin,):

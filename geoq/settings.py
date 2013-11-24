@@ -179,13 +179,21 @@ MIDDLEWARE_CLASSES = (
     #'stronghold.middleware.LoginRequiredMiddleware',        # works w/ stronghold
 )
 
-# django-guardian
+# auth setup
 AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend', # default
+    'userena.backends.UserenaAuthenticationBackend',
     'guardian.backends.ObjectPermissionBackend',
+    'django.contrib.auth.backends.ModelBackend', # default
 )
 ANONYMOUS_USER_ID = -1
-# /django-guardian
+AUTH_PROFILE_MODULE = 'accounts.MyProfile'
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+
+LOGIN_REDIRECT_URL = '/'
+#LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
+LOGIN_URL = '/accounts/signin/'
+LOGOUT_URL = '/accounts/signout/'
+# /auth setup
 
 ROOT_URLCONF = 'geoq.urls'
 
@@ -221,9 +229,17 @@ INSTALLED_APPS = (
     'leaflet',
     'maps',
     'jsonfield',
+
+    # auth setup
+    'guardian',
+    'userena',
+    'easy_thumbnails',
+    'accounts',
+    # /auth setup
+
+
     #'teamwork',     # sets up teams, rolls, & policy for permissions
     #'stronghold',   # sets default to require auth
-    'guardian',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -256,7 +272,7 @@ LOGGING = {
 }
 
 # Set default login location
-LOGIN_REDIRECT_URL = '/'
+#LOGIN_REDIRECT_URL = '/'
 
 
 # Override production settings with local settings if they exist

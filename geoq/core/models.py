@@ -23,13 +23,16 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 import json
+import sys
+
+from django.db.models.signals import pre_save, post_save
+from django.dispatch import dispatcher
+
 from django.contrib.auth.models import User
 from django.contrib.gis.db import models
 from django.contrib.gis.geos import MultiPolygon
 from django.core.urlresolvers import reverse
 from django.utils.datastructures import SortedDict
-from django.db.models.signals import post_save
-
 from managers import AOIManager
 
 TRUE_FALSE = [(0, 'False'), (1, 'True')]
@@ -246,6 +249,37 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 post_save.connect(create_user_profile, sender=User)
 
-import sys
+
+
+
+
+
+# def user_pre_save(sender, instance, **kwargs):
+#     # If the user is staff and they don't have default auth permissions
+#     group_ids = [g.id for g in instance.groups.all()]
+#     print group_ids
+#     if instance.is_staff and 1 not in group_ids:
+#             # give them default auth permissions.
+#             instance.groups.add(1)
+#             instance.save()
+#             # import pprint
+#             # pprint.pprint(dir(instance))
+#     elif 1 in group_ids:
+#             instance.groups.remove(1)
+#     print 'here'
+# pre_save.connect(user_pre_save, sender=User)
+
+
+# class ProxyUser(User):
+#     class Meta:
+#         proxy = True
+
+#     def save(self, *args, **kwargs):
+#         # do anything you need before saving
+#         print 'Awesome'
+#         super(ProxyUser, self).save(*args, **kwargs)
+#         # do anything you need after saving
+
+
 if not 'syncdb' in sys.argv[1:2] and not 'migrate' in sys.argv[1:2]:
     from meta_badges import *
