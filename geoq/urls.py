@@ -11,10 +11,10 @@
 # 'This software (GeoQ or Geographic Work Queueing and Tasking System)
 # is provided to the public as a courtesy of the National
 # Geospatial-Intelligence Agency.
-#  
+#
 # The above copyright notice and this permission notice shall be
 # included in all copies or substantial portions of the Software.
-#  
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 # EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 # MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,10 +38,11 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^geoq/', include('core.urls')),
     url(r'^maps/', include('maps.urls')),
-    url(r'^accounts/$',
-        'django.contrib.auth.views.login',),
-    url(r'^accounts/login/$', 'django.contrib.auth.views.login', name='login',),
-    url(r'^accounts/logout/$',
-        'django.contrib.auth.views.logout_then_login', name='logout'),
+    url(r'^accounts/', include('userena.urls')),
+    #url(r'^accounts/$',
+    #    'django.contrib.auth.views.login',),
+    #url(r'^accounts/login/$', 'django.contrib.auth.views.login', name='login',),
+    #url(r'^accounts/logout/$',
+    #    'django.contrib.auth.views.logout_then_login', name='logout'),
     url(r'^badges/', include('badges.urls')),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
