@@ -1,7 +1,5 @@
 
 from django.conf.urls import patterns, include, url
-from userena import views as userena_views
-
 from forms import SignupFormExtra
 
 
@@ -14,4 +12,5 @@ urlpatterns = patterns('userena.views',
 
     # If nothing overrides the urls, then load the default with userena.
     url(r'^', include('userena.urls')),
+
 )
