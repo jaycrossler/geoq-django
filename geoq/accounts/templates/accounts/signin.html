@@ -1,0 +1,21 @@
+{% extends "core/base.html" %}
+{% load url from future %}
+
+{% block title %}Login {% endblock %}
+{% block content %}
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+<h2>Sign in</h2>
+<form method="post" action="{% url 'userena_signin' %}">
+{% csrf_token %}
+{{ form }}
+
+<input type="submit" value="Login" />
+<input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+
+
+{% endblock %}

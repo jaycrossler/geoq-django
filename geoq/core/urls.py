@@ -11,10 +11,10 @@
 # 'This software (GeoQ or Geographic Work Queueing and Tasking System)
 # is provided to the public as a courtesy of the National
 # Geospatial-Intelligence Agency.
-#  
+#
 # The above copyright notice and this permission notice shall be
 # included in all copies or substantial portions of the Software.
-#  
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 # EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 # MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,8 +26,9 @@ from django.conf.urls import patterns, url
 from django.views.generic import CreateView, TemplateView, ListView, UpdateView
 from forms import AOIForm, JobForm, ProjectForm
 from models import AOI, Project, Job
-from views import BatchCreateAOIS, CreateFeaturesView, Dashboard, DetailedListView, JobDetailedListView, ChangeAOIStatus,\
-    JobDelete, AOIDelete, CreateJobView,CreateProjectView, redirect_to_unassigned_aoi
+from views import (BatchCreateAOIS, CreateFeaturesView, Dashboard, DetailedListView,
+    JobDetailedListView, ChangeAOIStatus, JobDelete, AOIDelete, CreateJobView,
+    CreateProjectView, redirect_to_unassigned_aoi)
 
 urlpatterns = patterns('',
     url(r'^$', Dashboard.as_view(), name='home'),
