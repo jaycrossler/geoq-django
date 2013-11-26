@@ -192,11 +192,8 @@ AUTH_PROFILE_MODULE = 'accounts.MyProfile'
 LOGIN_URL = '/accounts/signin/'
 LOGOUT_URL = '/accounts/signout/'
 
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'yourgmailaccount@gmail.com'
-EMAIL_HOST_PASSWORD = 'yourgmailpassword'
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+
 # /auth setup
 
 ROOT_URLCONF = 'geoq.urls'

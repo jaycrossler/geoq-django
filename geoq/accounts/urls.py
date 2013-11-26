@@ -6,7 +6,10 @@ from forms import SignupFormExtra
 urlpatterns = patterns('userena.views',
 
 	url(r'^signup/$', 'signup',
-		{'signup_form': SignupFormExtra},),
+		{
+		'signup_form': SignupFormExtra,
+		'template_name':'accounts/signup.html',
+		},),
 
 	url(r'^signin/$', 'signin',
 		{
