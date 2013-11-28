@@ -243,43 +243,13 @@ class UserProfile(models.Model):
     def __str__(self):
           return "%s's profile" % self.user
 
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-       profile, created = UserProfile.objects.get_or_create(user=instance)
 
-post_save.connect(create_user_profile, sender=User)
+# def create_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#        profile, created = UserProfile.objects.get_or_create(user=instance)
+#        print profile
 
-
-
-
-
-
-# def user_pre_save(sender, instance, **kwargs):
-#     # If the user is staff and they don't have default auth permissions
-#     group_ids = [g.id for g in instance.groups.all()]
-#     print group_ids
-#     if instance.is_staff and 1 not in group_ids:
-#             # give them default auth permissions.
-#             instance.groups.add(1)
-#             instance.save()
-#             # import pprint
-#             # pprint.pprint(dir(instance))
-#     elif 1 in group_ids:
-#             instance.groups.remove(1)
-#     print 'here'
-# pre_save.connect(user_pre_save, sender=User)
-
-
-# class ProxyUser(User):
-#     class Meta:
-#         proxy = True
-
-#     def save(self, *args, **kwargs):
-#         # do anything you need before saving
-#         print 'Awesome'
-#         super(ProxyUser, self).save(*args, **kwargs)
-#         # do anything you need after saving
-
+#post_save.connect(create_user_profile, sender=User)
 
 if not 'syncdb' in sys.argv[1:2] and not 'migrate' in sys.argv[1:2]:
     from meta_badges import *

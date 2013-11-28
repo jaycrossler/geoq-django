@@ -185,15 +185,14 @@ AUTHENTICATION_BACKENDS = (
     'guardian.backends.ObjectPermissionBackend',
     'django.contrib.auth.backends.ModelBackend', # default
 )
+
 ANONYMOUS_USER_ID = -1
-AUTH_PROFILE_MODULE = 'accounts.MyProfile'
+AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 
 #LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
 LOGIN_URL = '/accounts/signin/'
 LOGOUT_URL = '/accounts/signout/'
-
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
-
 # /auth setup
 
 ROOT_URLCONF = 'geoq.urls'
