@@ -142,13 +142,6 @@ LEAFLET_CONFIG = {
     }
 }
 
-# Add this setting, if you want to set base permission policies.
-#TEAMWORK_BASE_POLICIES = {
-    #'anonymous': (
-    #    'wiki.view_document',),
-    # 'authenticated': (
-    #     'wiki.view_document', 'wiki.add_document', 'wiki.add_revision'),
-#}
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '2t=^l2e$e5!du$0^c@3&qk4h_*stwwgp#1o$*n7#eisc)^2(wk'
@@ -176,7 +169,6 @@ MIDDLEWARE_CLASSES = (
     # Uncomment the next line for simple clickjacking protection:
     #'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'geoq.core.middleware.UserPermsMiddleware',             # works w/ guardian
-    #'stronghold.middleware.LoginRequiredMiddleware',        # works w/ stronghold
 )
 
 # auth setup
@@ -237,9 +229,6 @@ INSTALLED_APPS = (
     'accounts',
     # /auth setup
 
-
-    #'teamwork',     # sets up teams, rolls, & policy for permissions
-    #'stronghold',   # sets default to require auth
 )
 
 # A sample logging configuration. The only tangible logging
