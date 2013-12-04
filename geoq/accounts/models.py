@@ -20,6 +20,14 @@ class UserProfile(UserenaBaseProfile):
     organization = models.ForeignKey(Organization, null=True)
     # TODO: Add authorized field --- boolean? -- this works with Staff on user model.
 
+    """ from http://stackoverflow.com/questions/44109/extending-the-user-model-with-custom-fields-in-django; this is one mechanism for adding extra details (currently score for badges) to the User model """
+    defaultScore = 1
+    user = models.OneToOneField(User)
+    score = models.IntegerField(default=defaultScore)
+
+    def __str__(self):
+          return "%s's profile" % self.user
+
     def save(self, *args, **kwargs):
         super(UserProfile, self).save(*args, **kwargs)
 

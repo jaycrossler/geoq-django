@@ -234,22 +234,5 @@ class AOI(GeoQBase):
         verbose_name_plural = 'Areas of Interest'
 
 
-class UserProfile(models.Model):
-    """ from http://stackoverflow.com/questions/44109/extending-the-user-model-with-custom-fields-in-django; this is one mechanism for adding extra details (currently score for badges) to the User model """
-    defaultScore = 1
-    user = models.OneToOneField(User)
-    score = models.IntegerField(default=defaultScore)
-
-    def __str__(self):
-          return "%s's profile" % self.user
-
-
-# def create_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#        profile, created = UserProfile.objects.get_or_create(user=instance)
-#        print profile
-
-#post_save.connect(create_user_profile, sender=User)
-
 if not 'syncdb' in sys.argv[1:2] and not 'migrate' in sys.argv[1:2]:
     from meta_badges import *

@@ -28,7 +28,7 @@ from django.contrib.gis import admin
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django import forms
-from models import Project, Job, AOI, UserProfile
+from models import Project, Job, AOI
 from guardian.admin import GuardedModelAdmin
 
 
@@ -69,10 +69,7 @@ class JobAdmin(GuardedModelAdmin, ObjectAdmin):
  	filter_horizontal = ("analysts","reviewers","feature_types")
  	save_on_top = True
 
-# class UserProfileAdmin(ObjectAdmin):
-#     list_display = ('user','score')
 
 admin.site.register(Project, ObjectAdmin)
 admin.site.register(Job, JobAdmin)
 admin.site.register(AOI, AOIAdmin)
-#admin.site.register(UserProfile, UserProfileAdmin)
