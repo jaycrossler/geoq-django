@@ -185,6 +185,7 @@ AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 LOGIN_URL = '/accounts/signin/'
 LOGOUT_URL = '/accounts/signout/'
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+USERENA_ACTIVATION_DAYS = 3
 # /auth setup
 
 ROOT_URLCONF = 'geoq.urls'

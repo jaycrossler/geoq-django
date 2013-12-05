@@ -75,7 +75,8 @@ def sync():
     """ Runs the syncdb process with migrations """
     sh("python manage.py syncdb --noinput")
     sh("python manage.py migrate --all")
-
+    sh("python manage.py check_permissions")  # Check userena perms
+    sh("python manage.py clean_expired")  # Clean our expired userena perms
 
 @cmdopts([
     ('bind=', 'b', 'Bind server to provided IP address and port number.'),
