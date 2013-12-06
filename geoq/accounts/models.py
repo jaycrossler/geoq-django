@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User, Group
 from django.utils.translation import ugettext as _
@@ -15,28 +16,39 @@ class Organization(models.Model):
 class UserProfile(UserenaBaseProfile):
     user = models.OneToOneField(User,
                                 unique=True,
-                                verbose_name=_('user'),
-                                related_name='my_profile')
+                                verbose_name=_('user'))
     organization = models.ForeignKey(Organization, null=True)
-    # TODO: Add authorized field --- boolean? -- this works with Staff on user model.
+    authorized = models.BooleanField(help_text='Check this to approve member access.')
+    permissions_granted_by = models.ForeignKey(User, null=True, blank=True,
+        related_name='permissions_granted_by')
+    permission_granted_on = models.DateTimeField(auto_now_add=True, default=datetime.now())
 
-    """ from http://stackoverflow.com/questions/44109/extending-the-user-model-with-custom-fields-in-django; this is one mechanism for adding extra details (currently score for badges) to the User model """
+    # Badge scores
     defaultScore = 1
-    user = models.OneToOneField(User)
     score = models.IntegerField(default=defaultScore)
 
     def __str__(self):
           return "%s's profile" % self.user
 
     def save(self, *args, **kwargs):
+        user_presave = User.objects.get(pk=self.user.id)
         super(UserProfile, self).save(*args, **kwargs)
-
-        user = self.user
-        group_ids = [g.id for g in user.groups.all()]
-
-        if user.is_staff and 1 not in group_ids:
+        # TODO -- make this work!
+        # Grant default permissions to user if they are authorized.
+        group_ids = [g.id for g in self.user.groups.all()]
+        if self.authorized and 1 not in group_ids:
             # give them default auth permissions.
-            user.groups.add(1)
-        elif not user.is_staff and 1 in group_ids:
+            self.user.groups.add(1)
+            self.user.is_staff = True
+            self.user.save()
+        elif not self.authorized and 1 in group_ids:
             # if they are not staff and they have the permission, remove it.
-            user.groups.remove(1)
+            self.user.groups.remove(1)
+
+        # TODO -- make this work!
+        # if self.authorized and not user_presave.authorized:
+        #     permissions_granted_by
+
+        #     and self.authorized != user_presave.authorized:
+
+
