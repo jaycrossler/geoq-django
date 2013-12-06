@@ -142,13 +142,6 @@ LEAFLET_CONFIG = {
     }
 }
 
-# Add this setting, if you want to set base permission policies.
-#TEAMWORK_BASE_POLICIES = {
-    #'anonymous': (
-    #    'wiki.view_document',),
-    # 'authenticated': (
-    #     'wiki.view_document', 'wiki.add_document', 'wiki.add_revision'),
-#}
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '2t=^l2e$e5!du$0^c@3&qk4h_*stwwgp#1o$*n7#eisc)^2(wk'
@@ -175,9 +168,25 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     #'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'geoq.core.middleware.UserPermsMiddleware',             # works w/ teamwork
-    'stronghold.middleware.LoginRequiredMiddleware',        # works w/ stronghold
+    'geoq.core.middleware.UserPermsMiddleware',             # works w/ guardian
 )
+
+# auth setup
+AUTHENTICATION_BACKENDS = (
+    'userena.backends.UserenaAuthenticationBackend',
+    'guardian.backends.ObjectPermissionBackend',
+    'django.contrib.auth.backends.ModelBackend', # default
+)
+
+ANONYMOUS_USER_ID = -1
+AUTH_PROFILE_MODULE = 'accounts.UserProfile'
+
+#LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
+LOGIN_URL = '/accounts/signin/'
+LOGOUT_URL = '/accounts/signout/'
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+USERENA_ACTIVATION_DAYS = 3
+# /auth setup
 
 ROOT_URLCONF = 'geoq.urls'
 
@@ -213,8 +222,14 @@ INSTALLED_APPS = (
     'leaflet',
     'maps',
     'jsonfield',
-    'teamwork',     # sets up teams, rolls, & policy for permissions
-    'stronghold',   # sets default to require auth
+
+    # auth setup
+    'guardian',
+    'userena',
+    'easy_thumbnails',
+    'accounts',
+    # /auth setup
+
 )
 
 # A sample logging configuration. The only tangible logging
@@ -247,7 +262,7 @@ LOGGING = {
 }
 
 # Set default login location
-LOGIN_REDIRECT_URL = '/'
+#LOGIN_REDIRECT_URL = '/'
 
 
 # Override production settings with local settings if they exist

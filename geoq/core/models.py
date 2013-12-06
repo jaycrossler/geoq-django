@@ -23,13 +23,16 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 import json
+import sys
+
+from django.db.models.signals import pre_save, post_save
+from django.dispatch import dispatcher
+
 from django.contrib.auth.models import User
 from django.contrib.gis.db import models
 from django.contrib.gis.geos import MultiPolygon
 from django.core.urlresolvers import reverse
 from django.utils.datastructures import SortedDict
-from django.db.models.signals import post_save
-
 from managers import AOIManager
 
 TRUE_FALSE = [(0, 'False'), (1, 'True')]
@@ -74,7 +77,10 @@ class Project(GeoQBase):
 
     project_type = models.CharField(max_length=50, choices=PROJECT_TYPES)
     private = models.BooleanField(default=False, help_text='Make this project available to all users.')
-    supervisors = models.ManyToManyField(User, blank=True, null=True, related_name="supervisors")
+    project_admins = models.ManyToManyField(User, blank=True, null=True,
+        related_name="project_admins", help_text='User that has admin rights to project.')
+    contributors = models.ManyToManyField(User, blank=True, null=True,
+        related_name="contributors", help_text='User that will be able to take on jobs.')
 
     @property
     def jobs(self):
@@ -228,21 +234,5 @@ class AOI(GeoQBase):
         verbose_name_plural = 'Areas of Interest'
 
 
-class UserProfile(models.Model):
-    """ from http://stackoverflow.com/questions/44109/extending-the-user-model-with-custom-fields-in-django; this is one mechanism for adding extra details (currently score for badges) to the User model """
-    defaultScore = 1
-    user = models.OneToOneField(User)
-    score = models.IntegerField(default=defaultScore)
-
-    def __str__(self):
-          return "%s's profile" % self.user
-
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-       profile, created = UserProfile.objects.get_or_create(user=instance)
-
-post_save.connect(create_user_profile, sender=User)
-
-import sys
 if not 'syncdb' in sys.argv[1:2] and not 'migrate' in sys.argv[1:2]:
     from meta_badges import *

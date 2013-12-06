@@ -11,10 +11,10 @@
 # 'This software (GeoQ or Geographic Work Queueing and Tasking System)
 # is provided to the public as a courtesy of the National
 # Geospatial-Intelligence Agency.
-#  
+#
 # The above copyright notice and this permission notice shall be
 # included in all copies or substantial portions of the Software.
-#  
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 # EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 # MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,10 +28,11 @@ from django.contrib.gis import admin
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django import forms
-from models import Project, Job, AOI, UserProfile
+from models import Project, Job, AOI
+from guardian.admin import GuardedModelAdmin
 
 
-class ObjectAdmin(admin.OSMGeoAdmin, reversion.VersionAdmin):
+class ObjectAdmin(admin.OSMGeoAdmin, reversion.VersionAdmin,):
     list_display = ('name', 'created_at', 'updated_at')
 
 
@@ -64,14 +65,11 @@ class AOIAdmin(ObjectAdmin):
     rename_aois.short_description = "Rename AOIs"
 
 
-class JobAdmin(ObjectAdmin):
+class JobAdmin(GuardedModelAdmin, ObjectAdmin):
  	filter_horizontal = ("analysts","reviewers","feature_types")
  	save_on_top = True
 
-class UserProfileAdmin(ObjectAdmin):
-    list_display = ('user','score')
 
 admin.site.register(Project, ObjectAdmin)
 admin.site.register(Job, JobAdmin)
 admin.site.register(AOI, AOIAdmin)
-admin.site.register(UserProfile, UserProfileAdmin)

@@ -11,10 +11,10 @@
 # 'This software (GeoQ or Geographic Work Queueing and Tasking System)
 # is provided to the public as a courtesy of the National
 # Geospatial-Intelligence Agency.
-#  
+#
 # The above copyright notice and this permission notice shall be
 # included in all copies or substantial portions of the Software.
-#  
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 # EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 # MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,9 +26,21 @@
 
 class UserPermsMiddleware(object):
 
-    def process_request(self, request):
-    	"""
-    	Populates user permissions.
-    	"""
-        request.base_perms = request.user.get_all_permissions()
-        return None
+	def process_request(self, request):
+
+		"""
+		Populates user permissions.
+		"""
+		user = request.user
+		perms = []
+
+		perms = list(user.get_all_permissions()) + perms
+
+		#print perms
+
+		request.base_perms = set(perms)
+
+		import logging
+		logging.info(request.base_perms)
+
+		return None
