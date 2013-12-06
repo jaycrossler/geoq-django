@@ -212,7 +212,7 @@ class AOI(GeoQBase):
 
         geojson = SortedDict()
         geojson["type"] = "Feature"
-        geojson["properties"] = dict(id=self.id, status=self.status, analyst=(self.analyst if self.analyst is not None else 'Unassigned'), priority=self.priority, absolute_url=reverse('aoi-work', args=[self.id]))
+        geojson["properties"] = dict(id=self.id, status=self.status, analyst=(self.analyst.username if self.analyst is not None else 'Unassigned'), priority=self.priority, absolute_url=reverse('aoi-work', args=[self.id]))
         geojson["geometry"] = json.loads(self.polygon.json)
 
         return json.dumps(geojson)
