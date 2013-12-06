@@ -61,6 +61,7 @@ def install_dev_fixtures():
     """ Installs development fixtures in the correct order """
     fixtures = [
         'geoq/fixtures/initial_data.json',  # Users and site-wide data
+        'geoq/accounts/fixtures/initial_data.json',
         'geoq/core/fixtures/initial_data.json',  # Core
         'geoq/maps/fixtures/initial_data.json',  # Maps
         'geoq/badges/fixtures/initial_data.json', # Badge icon data to load
@@ -68,7 +69,6 @@ def install_dev_fixtures():
 
     for fixture in fixtures:
         sh("python manage.py loaddata {fixture}".format(fixture=fixture))
-
 
 @task
 def sync():
