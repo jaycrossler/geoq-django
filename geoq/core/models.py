@@ -235,4 +235,4 @@ class AOI(GeoQBase):
 
 
 if not 'syncdb' in sys.argv[1:2] and not 'migrate' in sys.argv[1:2]:
-    from meta_badges import *
+    from accounts.meta_badges import *
