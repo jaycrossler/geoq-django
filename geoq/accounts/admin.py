@@ -17,6 +17,5 @@ class UserProfileAdmin(ObjectAdmin):
     list_editable = ('organization','authorized',)
     readonly_fields = ('permissions_granted_by',)
 
-
 admin.site.register(Organization, OrganizationAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
