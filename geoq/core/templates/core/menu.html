@@ -6,7 +6,9 @@
     <div class="navbar-inner">
         {% block menu %}
             <div class="container-fluid">
+                {% comment %}{# Since open source -- removing nga logo from frontend display #}
                 <img class="pull-left" src="{% get_static_prefix %}images/nga_logo_40.png" height="35px" width="35px" style="padding: 3px 6px 3px 3px; margin-left:-17px; "/>
+                {% endcomment %}
                 <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
