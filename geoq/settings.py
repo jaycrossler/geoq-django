@@ -49,7 +49,7 @@ DATABASES = {
     }
 }
 
-AUTH_PROFILE_MODULE = 'core.UserProfile'
+AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 
 # Use this to change the base bootstrap library
 #BOOTSTRAP_BASE_URL = None
@@ -210,26 +210,22 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
 
     'south',
-    'badges', # django badges
 
     'compressor',
     'geoexplorer',
     'reversion',
+    'guardian',
+    'easy_thumbnails',
+    'userena',
     'bootstrap_toolkit',
     'django_select2',
-
-    'core',
     'leaflet',
-    'maps',
     'jsonfield',
 
-    # auth setup
-    'guardian',
-    'userena',
-    'easy_thumbnails',
     'accounts',
-    # /auth setup
-
+    'badges', # django badges
+    'core',
+    'maps'
 )
 
 # A sample logging configuration. The only tangible logging
