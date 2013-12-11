@@ -248,7 +248,7 @@
     "fields": {
         "codename": "add_revision", 
         "name": "Can add revision", 
-        "content_type": 10
+        "content_type": 13
     }
 },
 {
@@ -257,7 +257,7 @@
     "fields": {
         "codename": "change_revision", 
         "name": "Can change revision", 
-        "content_type": 10
+        "content_type": 13
     }
 },
 {
@@ -266,7 +266,7 @@
     "fields": {
         "codename": "delete_revision", 
         "name": "Can delete revision", 
-        "content_type": 10
+        "content_type": 13
     }
 },
 {
@@ -275,7 +275,7 @@
     "fields": {
         "codename": "add_version", 
         "name": "Can add version", 
-        "content_type": 11
+        "content_type": 14
     }
 },
 {
@@ -284,7 +284,7 @@
     "fields": {
         "codename": "change_version", 
         "name": "Can change version", 
-        "content_type": 11
+        "content_type": 14
     }
 },
 {
@@ -293,7 +293,7 @@
     "fields": {
         "codename": "delete_version", 
         "name": "Can delete version", 
-        "content_type": 11
+        "content_type": 14
     }
 },
 {
@@ -302,7 +302,7 @@
     "fields": {
         "codename": "add_project", 
         "name": "Can add project", 
-        "content_type": 12
+        "content_type": 15
     }
 },
 {
@@ -311,7 +311,7 @@
     "fields": {
         "codename": "change_project", 
         "name": "Can change project", 
-        "content_type": 12
+        "content_type": 15
     }
 },
 {
@@ -320,7 +320,7 @@
     "fields": {
         "codename": "delete_project", 
         "name": "Can delete project", 
-        "content_type": 12
+        "content_type": 15
     }
 },
 {
@@ -329,7 +329,7 @@
     "fields": {
         "codename": "add_job", 
         "name": "Can add job", 
-        "content_type": 13
+        "content_type": 16
     }
 },
 {
@@ -338,7 +338,7 @@
     "fields": {
         "codename": "change_job", 
         "name": "Can change job", 
-        "content_type": 13
+        "content_type": 16
     }
 },
 {
@@ -347,7 +347,7 @@
     "fields": {
         "codename": "delete_job", 
         "name": "Can delete job", 
-        "content_type": 13
+        "content_type": 16
     }
 },
 {
@@ -356,7 +356,7 @@
     "fields": {
         "codename": "add_aoi", 
         "name": "Can add Area of Interest", 
-        "content_type": 14
+        "content_type": 17
     }
 },
 {
@@ -365,7 +365,7 @@
     "fields": {
         "codename": "change_aoi", 
         "name": "Can change Area of Interest", 
-        "content_type": 14
+        "content_type": 17
     }
 },
 {
@@ -374,7 +374,7 @@
     "fields": {
         "codename": "delete_aoi", 
         "name": "Can delete Area of Interest", 
-        "content_type": 14
+        "content_type": 17
     }
 },
 {
@@ -383,7 +383,7 @@
     "fields": {
         "codename": "add_layer", 
         "name": "Can add layer", 
-        "content_type": 15
+        "content_type": 18
     }
 },
 {
@@ -392,7 +392,7 @@
     "fields": {
         "codename": "change_layer", 
         "name": "Can change layer", 
-        "content_type": 15
+        "content_type": 18
     }
 },
 {
@@ -401,7 +401,7 @@
     "fields": {
         "codename": "delete_layer", 
         "name": "Can delete layer", 
-        "content_type": 15
+        "content_type": 18
     }
 },
 {
@@ -410,7 +410,7 @@
     "fields": {
         "codename": "add_map", 
         "name": "Can add map", 
-        "content_type": 16
+        "content_type": 19
     }
 },
 {
@@ -419,7 +419,7 @@
     "fields": {
         "codename": "change_map", 
         "name": "Can change map", 
-        "content_type": 16
+        "content_type": 19
     }
 },
 {
@@ -428,7 +428,7 @@
     "fields": {
         "codename": "delete_map", 
         "name": "Can delete map", 
-        "content_type": 16
+        "content_type": 19
     }
 },
 {
@@ -437,7 +437,7 @@
     "fields": {
         "codename": "add_maplayer", 
         "name": "Can add map layer", 
-        "content_type": 17
+        "content_type": 20
     }
 },
 {
@@ -446,7 +446,7 @@
     "fields": {
         "codename": "change_maplayer", 
         "name": "Can change map layer", 
-        "content_type": 17
+        "content_type": 20
     }
 },
 {
@@ -455,7 +455,7 @@
     "fields": {
         "codename": "delete_maplayer", 
         "name": "Can delete map layer", 
-        "content_type": 17
+        "content_type": 20
     }
 },
 {
@@ -464,7 +464,7 @@
     "fields": {
         "codename": "add_feature", 
         "name": "Can add feature", 
-        "content_type": 18
+        "content_type": 21
     }
 },
 {
@@ -473,7 +473,7 @@
     "fields": {
         "codename": "change_feature", 
         "name": "Can change feature", 
-        "content_type": 18
+        "content_type": 21
     }
 },
 {
@@ -482,7 +482,7 @@
     "fields": {
         "codename": "delete_feature", 
         "name": "Can delete feature", 
-        "content_type": 18
+        "content_type": 21
     }
 },
 {
@@ -491,7 +491,7 @@
     "fields": {
         "codename": "add_featuretype", 
         "name": "Can add feature type", 
-        "content_type": 19
+        "content_type": 22
     }
 },
 {
@@ -500,7 +500,7 @@
     "fields": {
         "codename": "change_featuretype", 
         "name": "Can change feature type", 
-        "content_type": 19
+        "content_type": 22
     }
 },
 {
@@ -509,132 +509,6 @@
     "fields": {
         "codename": "delete_featuretype", 
         "name": "Can delete feature type", 
-        "content_type": 19
-    }
-},
-{
-    "pk": 58, 
-    "model": "auth.permission", 
-    "fields": {
-        "codename": "add_team", 
-        "name": "Can add team", 
-        "content_type": 20
-    }
-},
-{
-    "pk": 59, 
-    "model": "auth.permission", 
-    "fields": {
-        "codename": "change_team", 
-        "name": "Can change team", 
-        "content_type": 20
-    }
-},
-{
-    "pk": 60, 
-    "model": "auth.permission", 
-    "fields": {
-        "codename": "delete_team", 
-        "name": "Can delete team", 
-        "content_type": 20
-    }
-},
-{
-    "pk": 61, 
-    "model": "auth.permission", 
-    "fields": {
-        "codename": "view_team", 
-        "name": "Can view team", 
-        "content_type": 20
-    }
-},
-{
-    "pk": 62, 
-    "model": "auth.permission", 
-    "fields": {
-        "codename": "add_role", 
-        "name": "Can add role", 
-        "content_type": 21
-    }
-},
-{
-    "pk": 63, 
-    "model": "auth.permission", 
-    "fields": {
-        "codename": "change_role", 
-        "name": "Can change role", 
-        "content_type": 21
-    }
-},
-{
-    "pk": 64, 
-    "model": "auth.permission", 
-    "fields": {
-        "codename": "delete_role", 
-        "name": "Can delete role", 
-        "content_type": 21
-    }
-},
-{
-    "pk": 65, 
-    "model": "auth.permission", 
-    "fields": {
-        "codename": "view_role", 
-        "name": "Can view role", 
-        "content_type": 21
-    }
-},
-{
-    "pk": 66, 
-    "model": "auth.permission", 
-    "fields": {
-        "codename": "manage_role_permissions", 
-        "name": "Can manage role permissions", 
-        "content_type": 21
-    }
-},
-{
-    "pk": 67, 
-    "model": "auth.permission", 
-    "fields": {
-        "codename": "manage_role_users", 
-        "name": "Can manage role users", 
-        "content_type": 21
-    }
-},
-{
-    "pk": 68, 
-    "model": "auth.permission", 
-    "fields": {
-        "codename": "add_policy", 
-        "name": "Can add policy", 
-        "content_type": 22
-    }
-},
-{
-    "pk": 69, 
-    "model": "auth.permission", 
-    "fields": {
-        "codename": "change_policy", 
-        "name": "Can change policy", 
-        "content_type": 22
-    }
-},
-{
-    "pk": 70, 
-    "model": "auth.permission", 
-    "fields": {
-        "codename": "delete_policy", 
-        "name": "Can delete policy", 
-        "content_type": 22
-    }
-},
-{
-    "pk": 71, 
-    "model": "auth.permission", 
-    "fields": {
-        "codename": "view_policy", 
-        "name": "Can view policy", 
         "content_type": 22
     }
 },
@@ -671,7 +545,7 @@
     "fields": {
         "codename": "add_badge", 
         "name": "Can add badge", 
-        "content_type": 24
+        "content_type": 10
     }
 },
 {
@@ -680,7 +554,7 @@
     "fields": {
         "codename": "change_badge", 
         "name": "Can change badge", 
-        "content_type": 24
+        "content_type": 10
     }
 },
 {
@@ -689,7 +563,7 @@
     "fields": {
         "codename": "delete_badge", 
         "name": "Can delete badge", 
-        "content_type": 24
+        "content_type": 10
     }
 },
 {
@@ -698,7 +572,7 @@
     "fields": {
         "codename": "add_badgetouser", 
         "name": "Can add badge to user", 
-        "content_type": 25
+        "content_type": 11
     }
 },
 {
@@ -707,7 +581,7 @@
     "fields": {
         "codename": "change_badgetouser", 
         "name": "Can change badge to user", 
-        "content_type": 25
+        "content_type": 11
     }
 },
 {
@@ -716,7 +590,7 @@
     "fields": {
         "codename": "delete_badgetouser", 
         "name": "Can delete badge to user", 
-        "content_type": 25
+        "content_type": 11
     }
 },
 {
@@ -725,7 +599,7 @@
     "fields": {
         "codename": "add_badgesettings", 
         "name": "Can add badge settings", 
-        "content_type": 26
+        "content_type": 12
     }
 },
 {
@@ -734,7 +608,7 @@
     "fields": {
         "codename": "change_badgesettings", 
         "name": "Can change badge settings", 
-        "content_type": 26
+        "content_type": 12
     }
 },
 {
@@ -743,7 +617,7 @@
     "fields": {
         "codename": "delete_badgesettings", 
         "name": "Can delete badge settings", 
-        "content_type": 26
+        "content_type": 12
     }
 },
 {
@@ -752,7 +626,7 @@
     "fields": {
         "codename": "add_userenasignup", 
         "name": "Can add userena registration", 
-        "content_type": 27
+        "content_type": 23
     }
 },
 {
@@ -761,7 +635,7 @@
     "fields": {
         "codename": "change_userenasignup", 
         "name": "Can change userena registration", 
-        "content_type": 27
+        "content_type": 23
     }
 },
 {
@@ -770,7 +644,7 @@
     "fields": {
         "codename": "delete_userenasignup", 
         "name": "Can delete userena registration", 
-        "content_type": 27
+        "content_type": 23
     }
 },
 {
@@ -779,7 +653,7 @@
     "fields": {
         "codename": "add_source", 
         "name": "Can add source", 
-        "content_type": 28
+        "content_type": 24
     }
 },
 {
@@ -788,7 +662,7 @@
     "fields": {
         "codename": "change_source", 
         "name": "Can change source", 
-        "content_type": 28
+        "content_type": 24
     }
 },
 {
@@ -797,7 +671,7 @@
     "fields": {
         "codename": "delete_source", 
         "name": "Can delete source", 
-        "content_type": 28
+        "content_type": 24
     }
 },
 {
@@ -806,7 +680,7 @@
     "fields": {
         "codename": "add_thumbnail", 
         "name": "Can add thumbnail", 
-        "content_type": 29
+        "content_type": 25
     }
 },
 {
@@ -815,7 +689,7 @@
     "fields": {
         "codename": "change_thumbnail", 
         "name": "Can change thumbnail", 
-        "content_type": 29
+        "content_type": 25
     }
 },
 {
@@ -824,140 +698,133 @@
     "fields": {
         "codename": "delete_thumbnail", 
         "name": "Can delete thumbnail", 
+        "content_type": 25
+    }
+},
+{
+    "pk": 93,
+    "model": "auth.permission",
+    "fields": {
+        "codename": "add_organization",
+        "name": "Can add organization",
+        "content_type": 26
+    }
+},
+{
+    "pk": 94,
+    "model": "auth.permission",
+    "fields": {
+        "codename": "change_organization",
+        "name": "Can change organization",
+        "content_type": 26
+    }
+},
+{
+    "pk": 95,
+    "model": "auth.permission",
+    "fields": {
+        "codename": "delete_organization",
+        "name": "Can delete organization",
+        "content_type": 26
+    }
+},
+{
+    "pk": 96,
+    "model": "auth.permission",
+    "fields": {
+        "codename": "add_userprofile",
+        "name": "Can add user profile",
+        "content_type": 27
+    }
+},
+{
+    "pk": 97,
+    "model": "auth.permission",
+    "fields": {
+        "codename": "change_userprofile",
+        "name": "Can change user profile",
+        "content_type": 27
+    }
+},
+{
+    "pk": 98,
+    "model": "auth.permission",
+    "fields": {
+        "codename": "delete_userprofile",
+        "name": "Can delete user profile",
+        "content_type": 27
+    }
+},
+{
+    "pk": 99,
+    "model": "auth.permission",
+    "fields": {
+        "codename": "view_profile",
+        "name": "Can view profile",
+        "content_type": 27
+    }
+},
+{
+    "pk": 100,
+    "model": "auth.permission",
+    "fields": {
+        "codename": "add_userobjectpermission",
+        "name": "Can add user object permission",
+        "content_type": 28
+    }
+},
+{
+    "pk": 101,
+    "model": "auth.permission",
+    "fields": {
+        "codename": "change_userobjectpermission",
+        "name": "Can change user object permission",
+        "content_type": 28
+    }
+},
+{
+    "pk": 102,
+    "model": "auth.permission",
+    "fields": {
+        "codename": "delete_userobjectpermission",
+        "name": "Can delete user object permission",
+        "content_type": 28
+    }
+},
+{
+    "pk": 103,
+    "model": "auth.permission",
+    "fields": {
+        "codename": "add_groupobjectpermission",
+        "name": "Can add group object permission",
         "content_type": 29
     }
 },
 {
-    "pk": 93, 
-    "model": "auth.permission", 
+    "pk": 104,
+    "model": "auth.permission",
     "fields": {
-        "codename": "add_organization", 
-        "name": "Can add organization", 
-        "content_type": 30
+        "codename": "change_groupobjectpermission",
+        "name": "Can change group object permission",
+        "content_type": 29
     }
 },
 {
-    "pk": 94, 
-    "model": "auth.permission", 
+    "pk": 105,
+    "model": "auth.permission",
     "fields": {
-        "codename": "change_organization", 
-        "name": "Can change organization", 
-        "content_type": 30
+        "codename": "delete_groupobjectpermission",
+        "name": "Can delete group object permission",
+        "content_type": 29
     }
 },
 {
-    "pk": 95, 
-    "model": "auth.permission", 
+    "pk": 1,
+    "model": "auth.group",
     "fields": {
-        "codename": "delete_organization", 
-        "name": "Can delete organization", 
-        "content_type": 30
-    }
-},
-{
-    "pk": 96, 
-    "model": "auth.permission", 
-    "fields": {
-        "codename": "add_userprofile", 
-        "name": "Can add user profile", 
-        "content_type": 31
-    }
-},
-{
-    "pk": 97, 
-    "model": "auth.permission", 
-    "fields": {
-        "codename": "change_userprofile", 
-        "name": "Can change user profile", 
-        "content_type": 31
-    }
-},
-{
-    "pk": 98, 
-    "model": "auth.permission", 
-    "fields": {
-        "codename": "delete_userprofile", 
-        "name": "Can delete user profile", 
-        "content_type": 31
-    }
-},
-{
-    "pk": 99, 
-    "model": "auth.permission", 
-    "fields": {
-        "codename": "view_profile", 
-        "name": "Can view profile", 
-        "content_type": 31
-    }
-},
-{
-    "pk": 100, 
-    "model": "auth.permission", 
-    "fields": {
-        "codename": "add_userobjectpermission", 
-        "name": "Can add user object permission", 
-        "content_type": 32
-    }
-},
-{
-    "pk": 101, 
-    "model": "auth.permission", 
-    "fields": {
-        "codename": "change_userobjectpermission", 
-        "name": "Can change user object permission", 
-        "content_type": 32
-    }
-},
-{
-    "pk": 102, 
-    "model": "auth.permission", 
-    "fields": {
-        "codename": "delete_userobjectpermission", 
-        "name": "Can delete user object permission", 
-        "content_type": 32
-    }
-},
-{
-    "pk": 103, 
-    "model": "auth.permission", 
-    "fields": {
-        "codename": "add_groupobjectpermission", 
-        "name": "Can add group object permission", 
-        "content_type": 33
-    }
-},
-{
-    "pk": 104, 
-    "model": "auth.permission", 
-    "fields": {
-        "codename": "change_groupobjectpermission", 
-        "name": "Can change group object permission", 
-        "content_type": 33
-    }
-},
-{
-    "pk": 105, 
-    "model": "auth.permission", 
-    "fields": {
-        "codename": "delete_groupobjectpermission", 
-        "name": "Can delete group object permission", 
-        "content_type": 33
-    }
-},
-{
-    "pk": 1, 
-    "model": "auth.group", 
-    "fields": {
-        "name": "admin_group", 
+        "name": "admin_group",
         "permissions": [
-            93, 
-            94, 
-            95, 
-            96, 
-            97, 
-            98, 
-            99, 
-            19, 
+            19,
             20, 
             21, 
             4, 
@@ -1002,13 +869,7 @@
             90, 
             91, 
             92, 
-            103, 
-            104, 
-            105, 
-            100, 
-            101, 
-            102, 
-            52, 
+            52,
             53, 
             54, 
             55, 
