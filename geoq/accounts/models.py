@@ -13,6 +13,9 @@ class Organization(models.Model):
     class Meta:
         unique_together = ('name', 'primary_contact')
 
+    def __str__(self):
+          return self.name
+
 class UserProfile(UserenaBaseProfile):
     user = models.OneToOneField(User,
                                 unique=True,
