@@ -120,3 +120,29 @@ def create_db_user():
     sh('psql -d {database} -c {sql}'.format(database=database,
                                             sql='"CREATE USER {user} WITH PASSWORD \'{password}\';"'.format(user=user,
                                                                                                             password=password)))
+# Order matters for the list of apps, otherwise migrations reset may fail.
+_APPS = ['maps', 'accounts', 'badges', 'core']
+
+@task
+def reset_migrations(options):
+    """
+        Takes an existing environment and updates it after a full migration reset.
+    """
+    for app in _APPS:
+        sh('python manage.py migrate %s 0001 --fake  --delete-ghost-migrations' % app)
+
+@task
+def reset_migrations_full(options):
+    """
+        Resets south to start with a clean setup.
+        This task will process a default list: accounts, core, maps, badges
+        To run a full reset which removes all migraitons in repo -- run paver reset_south full
+
+    """
+    for app in _APPS:
+        sh('rm -rf geoq/%s/migrations/' % app)
+        sh('python manage.py schemamigration %s --initial' % app)
+
+    # Finally, we execute the last setup.
+    reset_migrations()
+
