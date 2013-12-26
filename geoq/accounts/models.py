@@ -21,17 +21,25 @@ class UserProfile(UserenaBaseProfile):
                                 unique=True,
                                 verbose_name=_('user'))
     organization = models.ForeignKey(Organization, null=True)
-    authorized = models.BooleanField(help_text='Check this to approve member access.')
-    permissions_granted_by = models.ForeignKey(User, null=True, blank=True,
-        related_name='permissions_granted_by')
-    permission_granted_on = models.DateTimeField(auto_now_add=True, default=datetime.now())
 
     # Badge scores
     defaultScore = 1
     score = models.IntegerField(default=defaultScore)
 
     def __str__(self):
-          return "%s's profile" % self.user
+        print self
+        #return "%s, %s, %s" % self.user, self.organization, self.email
+
+class UserAuthorization(models.Model):
+    user = models.ForeignKey(User)
+    authorized = models.BooleanField(help_text='Check this to approve member access.')
+    permissions_granted_by = models.ForeignKey(User, null=True, blank=True,
+        related_name='permissions_granted_by')
+    permission_granted_on = models.DateTimeField(auto_now_add=True, default=datetime.now())
+    user_profile = models.ForeignKey(UserProfile)
+
+    def __str__(self):
+          return "%s's authorization info" % self.user
 
     def save(self, *args, **kwargs):
         user_presave = User.objects.get(pk=self.user.id)
@@ -49,9 +57,9 @@ class UserProfile(UserenaBaseProfile):
             self.user.groups.remove(1)
 
         # TODO -- make this work!
+        # *** If person is authorized and part of an organization, then they can add people from that org.
+        # *** save permissions_granted_by as the user that is granting th permissions.
         # if self.authorized and not user_presave.authorized:
         #     permissions_granted_by
 
         #     and self.authorized != user_presave.authorized:
-
-
