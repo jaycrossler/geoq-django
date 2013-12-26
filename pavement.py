@@ -61,8 +61,9 @@ def install_dev_fixtures():
     """ Installs development fixtures in the correct order """
     fixtures = [
         'geoq/fixtures/initial_data.json',  # Users and site-wide data
-        'geoq/fixtures/users.json',
+        'geoq/accounts/fixture/initial_data.json',
         'geoq/maps/fixtures/initial_data_types.json',  # Maps
+        'geoq/core/fixture/initial_data.json',
         ]
 
     for fixture in fixtures:
@@ -78,6 +79,16 @@ def sync():
     """ Runs the syncdb process with migrations """
     sh("python manage.py syncdb --noinput")
     sh("python manage.py migrate --all --no-initial-data")
+
+@task
+def reset_dev_env():
+    """ Resets your dev environment from scratch in the current branch you are in. """
+    from geoq import settings
+    database = settings.DATABASES.get('default').get('NAME')
+    sh('dropdb {database}'.format(database=database))
+    createdb()
+    sync()
+    install_dev_fixtures()
 
 @cmdopts([
     ('bind=', 'b', 'Bind server to provided IP address and port number.'),
@@ -124,7 +135,7 @@ def create_db_user():
 _APPS = ['maps', 'accounts', 'badges', 'core']
 
 @task
-def reset_migrations(options):
+def reset_migrations():
     """
         Takes an existing environment and updates it after a full migration reset.
     """
@@ -132,7 +143,7 @@ def reset_migrations(options):
         sh('python manage.py migrate %s 0001 --fake  --delete-ghost-migrations' % app)
 
 @task
-def reset_migrations_full(options):
+def reset_migrations_full():
     """
         Resets south to start with a clean setup.
         This task will process a default list: accounts, core, maps, badges
