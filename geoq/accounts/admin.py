@@ -23,10 +23,21 @@ class UserProfileAdmin(ObjectAdmin):
     list_display = ('user','organization','score')
     readonly_fields = ('email',)
 
+    def __unicode__(self):
+        return self.user.organization
+
 class UserAuthorizationAdmin(ObjectAdmin):
-    list_display = ('user_profile','authorized')
+    list_display = ('user','Organization','Email','authorized')
     list_editable = ('authorized',)
     readonly_fields = ('permissions_granted_by',)
+
+    list_filter = ('user_profile__organization',)
+    raw_id_admin = ('user_profile',)
+
+    def Organization(self, obj):
+        return '%s' % (obj.user_profile.organization)
+    def Email(self, obj):
+        return '%s' % (obj.user.email)
 
 admin.site.register(EmailDomain, EmailDomainAdmin)
 admin.site.register(Organization, OrganizationAdmin)
