@@ -18,6 +18,20 @@ class Organization(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        """
+            Adds a permissions group for the organization if one
+            doesn't exist.
+        """
+        org_name = 'org-%s' % slugify(name)
+        try:
+            group_chk = Group.objects.get(name=org_name)
+        except Group.DoesNotExist:
+            Group.objects.create(name=org_name)
+
+        super(Organization, self).save(*args, **kwargs)
+
+
 class EmailDomain(models.Model):
     email_domain = models.CharField(max_length=50)
     organization = models.ForeignKey(Organization)
@@ -39,6 +53,12 @@ class UserProfile(UserenaBaseProfile):
 
     def __str__(self):
         return "%s, %s, %s" % (self.user, self.organization, self.email)
+
+    def save(self, *args, **kwargs):
+        """ Creates a user auth record if one doesn't exist. """
+        self.userauthorization, created = UserAuthorization.objects.get_or_create(
+            user=self.user, user_profile=self)
+        super(UserProfile, self).save()
 
     def clean(self):
         """
@@ -79,20 +99,20 @@ class UserProfile(UserenaBaseProfile):
 
 
 class UserAuthorization(models.Model):
-    user = models.ForeignKey(User)
+    user = models.OneToOneField(User)
+    user_profile = models.OneToOneField(UserProfile)
+
     authorized = models.BooleanField(help_text='Check this to approve member access.')
     permissions_granted_by = models.ForeignKey(User, null=True, blank=True,
         related_name='permissions_granted_by')
     permission_granted_on = models.DateTimeField(auto_now_add=True, default=datetime.now())
-    user_profile = models.ForeignKey(UserProfile)
 
     def __str__(self):
-          return "%s's authorization info" % self.user
+        return "%s, %s" % (self.user, self.user_profile)
 
     def save(self, *args, **kwargs):
         user_presave = User.objects.get(pk=self.user.id)
-        super(UserProfile, self).save(*args, **kwargs)
-        # TODO -- make this work!
+
         # Grant default permissions to user if they are authorized.
         group_ids = [g.id for g in self.user.groups.all()]
         if self.authorized and 1 not in group_ids:
@@ -104,10 +124,17 @@ class UserAuthorization(models.Model):
             # if they are not staff and they have the permission, remove it.
             self.user.groups.remove(1)
 
+
         # TODO -- make this work!
         # *** If person is authorized and part of an organization, then they can add people from that org.
+
+        #TODO
         # *** save permissions_granted_by as the user that is granting th permissions.
         # if self.authorized and not user_presave.authorized:
         #     permissions_granted_by
-
         #     and self.authorized != user_presave.authorized:
+
+
+        super(UserAuthorization, self).save()
+
+
