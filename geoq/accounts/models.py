@@ -3,8 +3,9 @@ from django.db import models
 from django.contrib.auth.models import User, Group
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
-from userena.models import UserenaBaseProfile
+from django.template.defaultfilters import slugify
 
+from userena.models import UserenaBaseProfile
 
 from django.db.models.signals import pre_save, post_save
 
@@ -23,7 +24,7 @@ class Organization(models.Model):
             Adds a permissions group for the organization if one
             doesn't exist.
         """
-        org_name = 'org-%s' % slugify(name)
+        org_name = 'org-%s' % slugify(self.name)
         try:
             group_chk = Group.objects.get(name=org_name)
         except Group.DoesNotExist:
@@ -56,6 +57,7 @@ class UserProfile(UserenaBaseProfile):
 
     def save(self, *args, **kwargs):
         """ Creates a user auth record if one doesn't exist. """
+        super(UserProfile, self).save()
         self.userauthorization, created = UserAuthorization.objects.get_or_create(
             user=self.user, user_profile=self)
         super(UserProfile, self).save()
@@ -75,7 +77,8 @@ class UserProfile(UserenaBaseProfile):
 
         domain = self.email.split('@')[1]
         if self.organization:
-            if domain and domain not in self.organization.emaildomain_set.all():
+            accepted_domains = [x['email_domain'] for x in self.organization.emaildomain_set.values('email_domain')]
+            if domain and domain not in accepted_domains:
                     raise ValidationError('User email domain must be in \
                         Organization domain options. Please add to the \
                         Organization record OR add a new Organization. Changes \
