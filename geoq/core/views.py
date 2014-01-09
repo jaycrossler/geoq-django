@@ -157,7 +157,7 @@ class CreateProjectView(CreateView):
         If the form is valid, save the associated model and add the current user as a reviewer.
         """
         self.object = form.save()
-        self.object.supervisors.add(self.request.user)
+        self.object.project_admins.add(self.request.user)
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
 
