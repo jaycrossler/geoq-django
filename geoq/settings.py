@@ -17,10 +17,10 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'geoq_django',  # Or path to database file if using sqlite3.
+        'NAME': 'geoq',  # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-        'USER': 'geoq_user',
-        'PASSWORD': '0NYCEVaBl1OXx8NTjy5A',
+        'USER': 'geoq',
+        'PASSWORD': 'geoq',
         'HOST': 'localhost',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '5432',  # Set to empty string for default.
     }
