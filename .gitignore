@@ -5,3 +5,12 @@ CACHE/*
 *.pyc
 local_settings.py
 
+dev-geoq-django
+dev-geoq-django/*
+
+.idea
+.idea/*
+.cache
+.cache/*
+*.swp
+.DS_Store
