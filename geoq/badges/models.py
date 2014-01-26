@@ -7,8 +7,8 @@ from django.conf import settings
 
 from singleton_models.models import SingletonModel
 
-from badges.signals import badge_awarded
-from badges.managers import BadgeManager
+from .signals import badge_awarded
+from .managers import BadgeManager
 
 if hasattr(settings, 'BADGE_LEVEL_CHOICES'):
     LEVEL_CHOICES = settings.BADGE_LEVEL_CHOICES

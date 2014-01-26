@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
-from models import Badge
+from .models import Badge
 
 def overview(request, extra_context={}):
     badges = Badge.objects.active().order_by("level")

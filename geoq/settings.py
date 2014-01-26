@@ -199,10 +199,10 @@ INSTALLED_APPS = (
     'leaflet',
     'jsonfield',
 
-    'accounts',
-    'badges', # django badges
-    'core',
-    'maps'
+    'geoq.accounts',
+    'geoq.badges', # django badges
+    'geoq.core',
+    'geoq.maps',
 )
 
 # A sample logging configuration. The only tangible logging

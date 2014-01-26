@@ -1,6 +1,6 @@
 from django.template import Library
-from badges.utils import badge_count
-from badges.models import LEVEL_CHOICES, Badge
+from .utils import badge_count
+from .models import LEVEL_CHOICES, Badge
 level_choices = dict(LEVEL_CHOICES)
 
 register = Library()

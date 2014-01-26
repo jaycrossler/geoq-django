@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from badges.models import Badge,BadgeSettings
+from .models import Badge,BadgeSettings
 from singleton_models.admin import SingletonModelAdmin
 
 class BadgeAdmin(admin.ModelAdmin):

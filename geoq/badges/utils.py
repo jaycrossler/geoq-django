@@ -3,8 +3,8 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 
-from badges.models import Badge as BadgeModel
-from badges.models import BadgeToUser, LEVEL_CHOICES
+from .models import Badge as BadgeModel
+from .models import BadgeToUser, LEVEL_CHOICES
 
 
 class RequiresUserOrProgress(Exception): pass
