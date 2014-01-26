@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
-from core.models import AOI, Job, Project
+from geoq.core.models import AOI, Job, Project
 from django.contrib.auth.models import User
 from django.contrib.gis.db import models
 from django.core.exceptions import ValidationError

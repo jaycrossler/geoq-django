@@ -29,10 +29,11 @@ def menu(active=None, request_path=None):
         'Help': {'index': 6, 'url': '#', 'active': False, 'dropdown': order_dict(help_dropdown, sort_key)},
     }
 
-    if request_path:
-        for i in menu_items.keys():
-            if menu_items[i].get('url', None):
-                if re.search(str(menu_items[i].get('url')), request_path):
-                    menu_items[i]['active'] = True
+    # TODO: Find out why this is throwing an error
+    # if request_path:
+    #     for i in menu_items.keys():
+    #         if menu_items[i].get('url', None):
+    #             if re.search(str(menu_items[i].get('url')), request_path):
+    #                 menu_items[i]['active'] = True
 
     return order_dict(menu_items, sort_key)
