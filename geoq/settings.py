@@ -203,7 +203,7 @@ INSTALLED_APPS = (
     'jsonfield',
 
     'geoq.accounts',
-#    'geoq.badges', # django badges
+#    'geoq.badges', # TODO: Get Badges working, or incorportae with gamification service
     'geoq.core',
     'geoq.maps',
 )
