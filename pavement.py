@@ -78,7 +78,22 @@ def start_django(options):
     sh('python manage.py runserver %s &' % bind)
 
 
-@needs(['sync',
+@task
+def delayed_fixtures():
+    """Loads maps"""
+    sh('python manage.py loaddata initial_data.json')
+
+
+@task
+def stop_django():
+    """
+    Stop the GeoNode Django application
+    """
+    kill('python', 'runserver')
+
+
+@needs(['stop_django',
+        'sync',
         'start_django'])
 def start():
     """ Syncs the database and then starts the development server. """
@@ -135,3 +150,44 @@ def reset_migrations_full():
     # Finally, we execute the last setup.
     reset_migrations()
 
+
+def kill(arg1, arg2):
+    """Stops a proces that contains arg1 and is filtered by arg2
+    """
+    from subprocess import Popen, PIPE
+
+    # Wait until ready
+    t0 = time.time()
+    # Wait no more than these many seconds
+    time_out = 30
+    running = True
+    lines = []
+
+    while running and time.time() - t0 < time_out:
+        p = Popen('ps aux | grep %s' % arg1, shell=True,
+                  stdin=PIPE, stdout=PIPE, stderr=PIPE, close_fds=True)
+
+        lines = p.stdout.readlines()
+
+        running = False
+        for line in lines:
+
+            if '%s' % arg2 in line:
+                running = True
+
+                # Get pid
+                fields = line.strip().split()
+
+                info('Stopping %s (process number %s)' % (arg1, fields[1]))
+                kill_cmd = 'kill -9 %s 2> /dev/null' % fields[1]
+                os.system(kill_cmd)
+
+        # Give it a little more time
+        time.sleep(1)
+    else:
+        pass
+
+    if running:
+        raise Exception('Could not stop %s: '
+                        'Running processes are\n%s'
+                        % (arg1, '\n'.join([l.strip() for l in lines])))
