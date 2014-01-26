@@ -1,5 +1,5 @@
 from django.db import models
-from . import registered_badges
+from utils import registered_badges
 
 class BadgeManager(models.Manager):
     def active(self):

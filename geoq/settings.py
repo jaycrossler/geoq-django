@@ -71,11 +71,13 @@ MEDIA_URL = '/images/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
+STATIC_URL_FOLDER = ''  # Can be set to something like 'geoq-test/' if the app is not run at root level
+STATIC_ROOT = '{0}{1}'.format('/usr/src/static/', STATIC_URL_FOLDER)
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
-STATIC_URL = '/static/'
+STATIC_URL = '{0}{1}'.format('/static/', STATIC_URL_FOLDER)
+
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -200,7 +202,7 @@ INSTALLED_APPS = (
     'jsonfield',
 
     'geoq.accounts',
-    'geoq.badges', # django badges
+#    'geoq.badges', # django badges
     'geoq.core',
     'geoq.maps',
 )

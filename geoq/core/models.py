@@ -211,5 +211,5 @@ class AOI(GeoQBase):
         verbose_name_plural = 'Areas of Interest'
 
 
-if not 'syncdb' in sys.argv[1:2] and not 'migrate' in sys.argv[1:2]:
-    from accounts.meta_badges import *
+# if not 'syncdb' in sys.argv[1:2] and not 'migrate' in sys.argv[1:2]:
+#     from accounts.meta_badges import *

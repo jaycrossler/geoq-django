@@ -11,7 +11,7 @@ from django.views.generic import DetailView, ListView, TemplateView, View, Delet
 from django.core.urlresolvers import reverse
 
 from models import Project, Job, AOI
-from maps.models import Layer, Map
+from geoq.maps.models import Layer, Map
 
 
 class Dashboard(TemplateView):

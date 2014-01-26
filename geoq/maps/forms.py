@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from core.forms import StyledModelForm
+from geoq.core.forms import StyledModelForm
 from django.forms.models import inlineformset_factory
 from models import Feature, FeatureType, Map, Layer, MapLayer
 

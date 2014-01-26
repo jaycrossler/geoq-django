@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import json
 import requests
-from core.models import AOI
+from geoq.core.models import AOI
 from django.contrib.gis.geos import GEOSGeometry
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse, reverse_lazy
