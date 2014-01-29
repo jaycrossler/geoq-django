@@ -163,7 +163,7 @@ AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 
 #LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
 LOGIN_URL = '/accounts/signin/'
-LOGOUT_URL = '/accounts/signout/'
+LOGOUT_URL = '/geoq'
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 USERENA_ACTIVATION_DAYS = 3
 # /auth setup
@@ -174,7 +174,8 @@ ROOT_URLCONF = 'geoq.urls'
 WSGI_APPLICATION = 'geoq.wsgi.application'
 
 TEMPLATE_DIRS = (
-    os.path.join(SITE_ROOT, 'templates')
+    os.path.join(SITE_ROOT, 'templates'),
+    SITE_ROOT,
 )
 
 INSTALLED_APPS = (
@@ -202,7 +203,7 @@ INSTALLED_APPS = (
     'leaflet',
     'jsonfield',
 
-    'geoq.accounts',
+    'geoq.accounts', # TODO:Accounts -- Figure out what we are doing
 #    'geoq.badges', # TODO: Get Badges working, or incorportae with gamification service
     'geoq.core',
     'geoq.maps',
