@@ -6,12 +6,15 @@ import json
 import requests
 
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+
 from django.contrib.gis.geos import GEOSGeometry
+from django.core.urlresolvers import reverse
 from django.forms.util import ValidationError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
+from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView, TemplateView, View, DeleteView, CreateView
-from django.core.urlresolvers import reverse
 
 from models import Project, Job, AOI
 from geoq.maps.models import Layer, Map
@@ -150,6 +153,7 @@ class AOIDelete(DeleteView):
     def get_success_url(self):
         return reverse('job-detail', args=[self.object.job.pk])
 
+
 class CreateProjectView(CreateView):
     """
     Create view that adds the user that created the job as a reviewer.
@@ -220,6 +224,7 @@ def usng(request):
     resp = requests.get(base_url, params=params)
     return HttpResponse(resp, mimetype="application/json")
 
+@login_required
 def batch_create_aois(request, *args, **kwargs):
         aois = request.POST.get('aois')
         job = Job.objects.get(id=kwargs.get('job_pk'))

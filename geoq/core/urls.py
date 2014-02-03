@@ -3,6 +3,8 @@
 # is subject to the Rights in Technical Data-Noncommercial Items clause at DFARS 252.227-7013 (FEB 2012)
 
 from django.conf.urls import patterns, url
+from django.contrib.auth.decorators import login_required
+
 from django.views.generic import CreateView, TemplateView, ListView, UpdateView
 from forms import AOIForm, JobForm, ProjectForm
 from models import AOI, Project, Job
@@ -16,20 +18,20 @@ urlpatterns = patterns('',
     # PROJECTS
     url(r'^projects/?$',
         ListView.as_view(queryset=Project.objects.all()),
-                         name='project-list'),
+        name='project-list'),
 
     url(r'^projects/(?P<pk>\d+)/?$',
         DetailedListView.as_view(template_name="core/project_detail.html"),
         name='project-detail'),
 
-    url(r'^projects/create/?$',
+    url(r'^projects/create/?$', login_required(
         CreateProjectView.as_view(form_class=ProjectForm,
-                           template_name="core/generic_form.html"),
-                           name='project-create'),
-    url(r'^projects/update/(?P<pk>\d+)/?$',
+                           template_name="core/generic_form.html")),
+        name='project-create'),
+    url(r'^projects/update/(?P<pk>\d+)/?$', login_required(
         UpdateView.as_view(queryset=Project.objects.all(),
                            template_name='core/generic_form.html',
-                           form_class=ProjectForm),
+                           form_class=ProjectForm)),
         name='project-update'),
 
     # JOBS
@@ -39,44 +41,47 @@ urlpatterns = patterns('',
         name='job-detail'),
     url(r'^jobs/(?P<pk>\d+)/next-aoi', redirect_to_unassigned_aoi, name='job-next-aoi'),
     url(r'^jobs/create/?$',
-        CreateJobView.as_view(queryset=Job.objects.all(),
+        login_required(CreateJobView.as_view(queryset=Job.objects.all(),
                            template_name='core/generic_form.html',
-                           form_class=JobForm),
+                           form_class=JobForm)),
         name='job-create'),
     url(r'^jobs/update/(?P<pk>\d+)/?$',
-        UpdateView.as_view(queryset=Job.objects.all(),
+        login_required(UpdateView.as_view(queryset=Job.objects.all(),
                            template_name='core/generic_form.html',
-                           form_class=JobForm),
+                           form_class=JobForm)),
         name='job-update'),
     url(r'^jobs/delete/(?P<pk>\d+)/?$',
-        JobDelete.as_view(),
+        login_required(JobDelete.as_view()),
         name='job-delete'),
     url(r'^jobs/(?P<job_pk>\d+)/create-aois/?$',
-        BatchCreateAOIS.as_view(),
+        login_required(BatchCreateAOIS.as_view()),
         name='job-create-aois'),
+
     url(r'^jobs/(?P<job_pk>\d+)/batch-create-aois/?$',
+        #login required set in views
         'core.views.batch_create_aois', name='job-batch-create-aois'),
 
     # AOIS
-    url(r'^aois/work/(?P<pk>\d+)/?$', CreateFeaturesView.as_view(), name='aoi-work'),
-    url(r'^aois/update-status/(?P<pk>\d+)/(?P<status>Unassigned|Assigned|In work|Submitted|Completed)/?$',
-        ChangeAOIStatus.as_view(), name="aoi-update-status"),
-    url(r'^aois/create/?$',
+    url(r'^aois/work/(?P<pk>\d+)/?$',
+        login_required(CreateFeaturesView.as_view()), name='aoi-work'),
+    url(r'^aois/update-status/(?P<pk>\d+)/(?P<status>Unassigned|Assigned|In work|Submitted|Completed)/?$', login_required(
+        ChangeAOIStatus.as_view()),
+        name="aoi-update-status"),
+    url(r'^aois/create/?$', login_required(
         CreateView.as_view(queryset=AOI.objects.all(),
                            template_name='core/generic_form.html',
-                           form_class=AOIForm),
+                           form_class=AOIForm)),
         name='aoi-create'),
-    url(r'^aois/update/(?P<pk>\d+)/?$',
+    url(r'^aois/update/(?P<pk>\d+)/?$', login_required(
         UpdateView.as_view(queryset=AOI.objects.all(),
                            template_name='core/generic_form.html',
-                           form_class=AOIForm),
+                           form_class=AOIForm)),
         name='aoi-update'),
-    url(r'^aois/delete/(?P<pk>\d+)/?$',
-        AOIDelete.as_view(),
+    url(r'^aois/delete/(?P<pk>\d+)/?$', login_required(
+        AOIDelete.as_view()),
         name='aoi-delete'),
 
     # OTHER URLS
     url(r'^edit/?$', TemplateView.as_view(template_name='core/edit.html'), name='edit'),
     url(r'^api/geo/usng/?$', 'core.views.usng', name='usng'),
-
 )
