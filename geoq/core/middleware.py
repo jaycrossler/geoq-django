@@ -4,15 +4,15 @@
 
 class UserPermsMiddleware(object):
 
-	def process_request(self, request):
+    def process_request(self, request):
 
-		"""
-		Populates user permissions to use in the templates.
-		"""
-		user = request.user
-		perms = []
+        """
+        Populates user permissions to use in the templates.
+        """
+        user = request.user
+        perms = []
 
-		perms = list(user.get_all_permissions()) + perms
-		request.base_perms = set(perms)
+        perms = list(user.get_all_permissions()) + perms
+        request.base_perms = set(perms)
 
-		return None
+        return None
