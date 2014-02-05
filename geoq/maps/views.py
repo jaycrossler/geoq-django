@@ -1,17 +1,24 @@
 # -*- coding: utf-8 -*-
+# This technical data was produced for the U. S. Government under Contract No. W15P7T-13-C-F600, and
+# is subject to the Rights in Technical Data-Noncommercial Items clause at DFARS 252.227-7013 (FEB 2012)
+
 import json
 import requests
-from geoq.core.models import AOI
+
+from django.contrib.auth.decorators import login_required
 from django.contrib.gis.geos import GEOSGeometry
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.core import serializers
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.views.generic import CreateView, DetailView, ListView, TemplateView, UpdateView, View, DeleteView
+
 from forms import MapForm, MapInlineFormset
+
+from geoq.core.models import AOI
 from models import Feature, FeatureType, Map, Layer, GeoeventsSource
+
 import logging
 
 logger = logging.getLogger(__name__)
@@ -58,7 +65,7 @@ class CreateFeatures(View):
 
         return HttpResponse([response], mimetype="application/json")
 
-
+@login_required
 def create_map(request):
 
     if request.method == 'POST':

@@ -6,6 +6,7 @@
 
         <div class="span12">
             <span class="list-view-header">Layers</span>
+            {% if 'maps.add_map' in request.base_perms %}
             <!-- span><a class="btn btn-small pull-right" href="{% url 'layer-create' %}">Add New</a></span -->
             <div class="btn-group pull-right">
                 <a class="btn btn-mini" href="{% url 'layer-create' %}">Add New</a>
@@ -16,6 +17,7 @@
                     <li><a href="{% url 'layer-import' %}">Import</a></li>
                 </ul>
             </div>
+            {% endif %}
         </div>
         <div class="row"><span class="span6"/></div>
         <div>
