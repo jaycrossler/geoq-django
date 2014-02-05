@@ -243,7 +243,7 @@ class Feature(models.Model):
     template = models.ForeignKey("FeatureType", on_delete=models.PROTECT)
 
     # Allow the user to save their own properties
-    properties = JSONField(load_kwargs={'object_pairs_hook': SortedDict}, blank=True, null=True)
+    properties = JSONField(load_kwargs={}, blank=True, null=True)
 
     # These help the user identify features when data is exposed outside of the application (Geoserver).
     job = models.ForeignKey(Job, editable=False)
@@ -291,8 +291,8 @@ class FeatureType(models.Model):
 
     name = models.CharField(max_length=200)
     type = models.CharField(choices=FEATURE_TYPES, max_length=25)
-    properties = JSONField(load_kwargs={'object_pairs_hook': SortedDict}, blank=True, null=True)
-    style = JSONField(load_kwargs={'object_pairs_hook': SortedDict}, blank=True, null=True)
+    properties = JSONField(load_kwargs={}, blank=True, null=True)
+    style = JSONField(load_kwargs={}, blank=True, null=True)
 
     def to_json(self):
         return json.dumps(dict(id=self.id,
@@ -309,3 +309,8 @@ class FeatureType(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class GeoeventsSource(models.Model):
+    name = models.CharField(max_length=200)
+    url = models.URLField(help_text='URL of service location. Requires JSONP support')

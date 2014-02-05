@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import reversion
 from django.contrib.gis import admin
-from models import Layer, Map, MapLayer, Feature, FeatureType
+from models import Layer, Map, MapLayer, Feature, FeatureType, GeoeventsSource
 
 
 class MapLayerInline(admin.TabularInline):
@@ -51,9 +51,14 @@ class FeatureAdmin(reversion.VersionAdmin, admin.OSMGeoAdmin):
 class FeatureTypeAdmin(reversion.VersionAdmin, admin.ModelAdmin):
     save_as = True
 
+class GeoeventsSourceAdmin(admin.ModelAdmin):
+    model = GeoeventsSource
+    list_display = ['name','url']
+
 #admin.site.register(Point, FeatureAdmin)
 #admin.site.register(Polygon, FeatureAdmin)
 admin.site.register(Feature, FeatureAdmin)
 admin.site.register(FeatureType, FeatureTypeAdmin)
 admin.site.register(Layer, LayerAdmin)
 admin.site.register(Map, MapAdmin)
+admin.site.register(GeoeventsSource, GeoeventsSourceAdmin)

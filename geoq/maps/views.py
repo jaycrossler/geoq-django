@@ -5,12 +5,13 @@ from geoq.core.models import AOI
 from django.contrib.gis.geos import GEOSGeometry
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse, reverse_lazy
+from django.core import serializers
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.views.generic import CreateView, DetailView, ListView, TemplateView, UpdateView, View, DeleteView
 from forms import MapForm, MapInlineFormset
-from models import Feature, FeatureType, Map, Layer
+from models import Feature, FeatureType, Map, Layer, GeoeventsSource
 import logging
 
 logger = logging.getLogger(__name__)
@@ -119,6 +120,41 @@ class LayerListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(LayerListView, self).get_context_data(**kwargs)
         return context
+
+class LayerImport(ListView):
+
+    model = Layer
+    template_name = "maps/layer_import.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(LayerImport, self).get_context_data(**kwargs)
+        context['geoevents_sources'] = GeoeventsSource.objects.all()
+        return context
+
+    def post(self, request, *args, **kwargs):
+
+        layers = request.POST.getlist('layer')
+
+        for lay in layers:
+            layer = json.loads(lay)
+            # see if it's already in here. assume 'url' and 'layer' attributes make it unique
+            l = Layer.objects.filter( url=layer['url'], layer=layer['layer'] )
+            if not l:
+                # add the layer
+                new_layer = Layer()
+                for key,value in layer.iteritems():
+                    if key == 'layer_params':
+                        # TODO: need to pass json object here
+                        pass
+                    else:
+                        setattr(new_layer,key,value)
+
+                new_layer.save()
+
+        return HttpResponseRedirect(reverse('layer-list'))
+
+
+
 
 class LayerDelete(DeleteView):
     model = Layer

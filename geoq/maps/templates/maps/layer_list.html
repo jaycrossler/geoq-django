@@ -6,7 +6,16 @@
 
         <div class="span12">
             <span class="list-view-header">Layers</span>
-            <span><a class="btn btn-small pull-right" href="{% url 'layer-create' %}">Add New</a></span>
+            <!-- span><a class="btn btn-small pull-right" href="{% url 'layer-create' %}">Add New</a></span -->
+            <div class="btn-group pull-right">
+                <a class="btn btn-mini" href="{% url 'layer-create' %}">Add New</a>
+                <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'layer-import' %}">Import</a></li>
+                </ul>
+            </div>
         </div>
         <div class="row"><span class="span6"/></div>
         <div>
