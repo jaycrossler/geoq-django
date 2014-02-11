@@ -9,7 +9,7 @@ from django.views.generic import CreateView, TemplateView, ListView, UpdateView
 from forms import AOIForm, JobForm, ProjectForm
 from models import AOI, Project, Job
 from views import (BatchCreateAOIS, CreateFeaturesView, Dashboard, DetailedListView,
-    JobDetailedListView, ChangeAOIStatus, JobDelete, AOIDelete, CreateJobView,
+    JobDetailedListView, AOIDetailedListView, ChangeAOIStatus, JobDelete, AOIDelete, CreateJobView,
     CreateProjectView, redirect_to_unassigned_aoi)
 
 urlpatterns = patterns('',
@@ -62,6 +62,7 @@ urlpatterns = patterns('',
         'core.views.batch_create_aois', name='job-batch-create-aois'),
 
     # AOIS
+    url(r'^aois/(?P<status>[a-zA-Z_ ]+)?/?$', AOIDetailedListView.as_view(template_name='core/aoi_list.html'), name='aoi-list'),
     url(r'^aois/work/(?P<pk>\d+)/?$',
         login_required(CreateFeaturesView.as_view()), name='aoi-work'),
     url(r'^aois/update-status/(?P<pk>\d+)/(?P<status>Unassigned|Assigned|In work|Submitted|Completed)/?$', login_required(

@@ -153,6 +153,39 @@ class AOIDelete(DeleteView):
     def get_success_url(self):
         return reverse('job-detail', args=[self.object.job.pk])
 
+class AOIDetailedListView(ListView):
+    """
+    A mixture between a list view and detailed view.
+    """
+
+    paginate_by = 25
+    model = AOI
+    default_status = 'unassigned'
+
+    def get_queryset(self):
+        status = getattr(self, 'status', None)
+        self.queryset = AOI.objects.all()
+        if status and (status in [value.lower() for value in AOI.STATUS_VALUES]):
+            return self.queryset.filter(status__iexact=status)
+        else:
+            return self.queryset
+
+    def get(self, request, *args, **kwargs):
+        self.status = self.kwargs.get('status')
+
+        if self.status and hasattr(self.status, "lower"):
+            self.status = self.status.lower()
+        else:
+            self.status = self.default_status.lower()
+
+        return super(AOIDetailedListView, self).get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        cv = super(AOIDetailedListView, self).get_context_data(**kwargs)
+        cv['statuses'] = AOI.STATUS_VALUES
+        cv['active_status'] = self.status
+        return cv
+
 
 class CreateProjectView(CreateView):
     """
