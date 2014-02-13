@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, TemplateView, ListView, UpdateView
 from forms import AOIForm, JobForm, ProjectForm
 from models import AOI, Project, Job
+from proxies import proxy_to
 from views import (BatchCreateAOIS, CreateFeaturesView, Dashboard, DetailedListView,
     JobDetailedListView, AOIDetailedListView, ChangeAOIStatus, JobDelete, AOIDelete, CreateJobView,
     CreateProjectView, redirect_to_unassigned_aoi)
@@ -85,4 +86,5 @@ urlpatterns = patterns('',
     # OTHER URLS
     url(r'^edit/?$', TemplateView.as_view(template_name='core/edit.html'), name='edit'),
     url(r'^api/geo/usng/?$', 'core.views.usng', name='usng'),
+    url(r'^proxy/(?P<path>.*)$', proxy_to, {'target_url': ''}),
 )
