@@ -29,7 +29,7 @@ def menu(active=None, request_path=None):
         'Projects': {'index': 2, 'url': reverse_lazy('project-list'), 'active': False},
         'Jobs': {'index': 3, 'url': reverse_lazy('job-list'), 'active': False},
         'Maps':  {'index': 4, 'url': '#', 'active': False, 'dropdown': order_dict(maps_dropdown, sort_key)},
-        'Help': {'index': 6, 'url': '#', 'active': False, 'dropdown': order_dict(help_dropdown, sort_key)},
+        # 'Help': {'index': 6, 'url': '#', 'active': False, 'dropdown': order_dict(help_dropdown, sort_key)},
     }
 
     if request_path:
