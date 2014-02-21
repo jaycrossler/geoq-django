@@ -14,10 +14,10 @@ def menu(active=None, request_path=None):
 
     sort_key = lambda t:  t[1].get('index', None)
 
-    help_dropdown = {
-        'Submit Feedback':  {'index': 1, 'url':  reverse_lazy('home'), 'active': False},
-        'FAQs':  {'index': 2, 'url': reverse_lazy('home'), 'active': False},
-        }
+    #help_dropdown = {
+    #    'Submit Feedback':  {'index': 1, 'url':  reverse_lazy('home'), 'active': False},
+    #    'FAQs':  {'index': 2, 'url': reverse_lazy('home'), 'active': False},
+    #    }
 
     maps_dropdown = {
         'Maps':  {'index': 1, 'url': reverse_lazy('map-list'), 'active': False},
