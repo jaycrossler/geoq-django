@@ -125,8 +125,8 @@ def create_db_user():
     password = settings.DATABASES.get('default').get('PASSWORD')
 
     sh('psql -d {database} -c {sql}'.format(database=database,
-                                            sql='"CREATE USER {user} WITH PASSWORD \'{password}\';"'.format(user=user,
-                                                                                                            password=password)))
+                                            sql='"CREATE USER {user} WITH PASSWORD \'{password}\';"'.format(user=user, password=password)))
+
 # Order matters for the list of apps, otherwise migrations reset may fail.
 #_APPS = ['maps', 'accounts', 'badges', 'core']
 # Removing badges, but since order matters, I am leaving the original list until
