@@ -44,7 +44,7 @@ def install_dev_fixtures():
         'geoq/accounts/fixture/initial_data.json',
         'geoq/maps/fixtures/initial_data_types.json',  # Maps
         'geoq/core/fixture/initial_data.json',
-        'geoq/badges/fixtures/initial_data.json',
+        #'geoq/badges/fixtures/initial_data.json',
         ]
 
     for fixture in fixtures:
@@ -128,7 +128,10 @@ def create_db_user():
                                             sql='"CREATE USER {user} WITH PASSWORD \'{password}\';"'.format(user=user,
                                                                                                             password=password)))
 # Order matters for the list of apps, otherwise migrations reset may fail.
-_APPS = ['maps', 'accounts', 'badges', 'core']
+#_APPS = ['maps', 'accounts', 'badges', 'core']
+# Removing badges, but since order matters, I am leaving the original list until
+# we get badges solved.
+_APPS = ['maps', 'accounts', 'core']
 
 @task
 def reset_migrations():
