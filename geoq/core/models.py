@@ -141,6 +141,12 @@ class Job(GeoQBase):
         """
         return self.aois.filter(status='Completed')
 
+    def in_work(self):
+        """
+        Returns the AOIs currently being worked
+        """
+        return self.aois.filter(status='In work')
+
     def geoJSON(self, as_json=True):
         """
         Returns geoJSON of the feature.
@@ -198,9 +204,9 @@ class AOI(GeoQBase):
 
         geojson = SortedDict()
         geojson["type"] = "Feature"
-        geojson["properties"] = dict(id=self.id, status=self.status, analyst=(self.analyst.username if self.analyst is not None else 'Unassigned'), priority=self.priority, absolute_url=reverse('aoi-work', args=[self.id]))
+        geojson["properties"] = dict(id=self.id, status=self.status, analyst=(self.analyst.username if self.analyst is not None else 'Unassigned'), \
+           priority=self.priority, absolute_url=reverse('aoi-work', args=[self.id]), delete_url=reverse('aoi-delete', args=[self.id]))
         geojson["geometry"] = json.loads(self.polygon.json)
-
         return json.dumps(geojson)
 
     def user_can_complete(self, user):
