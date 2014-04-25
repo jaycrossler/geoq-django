@@ -65,10 +65,12 @@ class Grid:
         coords = []
 
 
-        for x in [easting,easting+1]:
-            for y in self.get_northing_list(x-easting,northing):
+        for x_index in [easting,easting+1]:
+            for y_index in self.get_northing_list(x_index-easting,northing):
                 e = e_index
                 n = n_index
+                x = x_index
+                y = y_index
                 if x == 100:
                     x = 0
                     e = e_index+1
