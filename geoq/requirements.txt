@@ -16,5 +16,5 @@ django-userena==1.2.4
 easy-thumbnails==1.4
 jsonfield==0.9.17
 psycopg2==2.5.1
-requests==1.2.3
+requests==2.2.1
 six==1.4.1

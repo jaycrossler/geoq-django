@@ -11,7 +11,7 @@
                     <i class="icon-list-alt"></i>
                     <a href="{% url 'project-list' %}">View All</a>
 
-                    {% if 'core.add_project' in request.base_perms %}
+                    {% if 'core.add_job' in request.base_perms %}
                     |
                     <i class="icon-edit"></i>
                         <a href="{% url 'project-create' %}">Create</a>

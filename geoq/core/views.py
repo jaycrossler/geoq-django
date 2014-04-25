@@ -4,12 +4,15 @@
 
 import json
 import requests
+import utils
 
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.http import Http404, HttpResponse
 
 from django.contrib.gis.geos import GEOSGeometry
 from django.core.urlresolvers import reverse
+from django.core.exceptions import ObjectDoesNotExist
 from django.forms.util import ValidationError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
@@ -18,6 +21,9 @@ from django.views.generic import DetailView, ListView, TemplateView, View, Delet
 
 from models import Project, Job, AOI
 from geoq.maps.models import Layer, Map
+
+from geoq.mgrs.utils import Grid,GridException
+
 
 
 class Dashboard(TemplateView):
@@ -227,6 +233,9 @@ class ChangeAOIStatus(View):
             aoi.analyst = request.user
             aoi.status = status
             aoi.save()
+
+            # send aoi completion event
+            utils.send_aoi_create_event(request.user, aoi.id, aoi.features.all().count())
             return HttpResponse(json.dumps({aoi.id: aoi.status}), mimetype="application/json")
         else:
             error = dict(error=403,
@@ -256,6 +265,45 @@ def usng(request):
     params['srsName'] = 'EPSG:4326'
     resp = requests.get(base_url, params=params)
     return HttpResponse(resp, mimetype="application/json")
+
+def mgrs(request):
+    """
+    Create mgrs grid in manner similar to usng above
+    """
+
+    bbox = request.GET.get('bbox')
+
+    if not bbox:
+        return HttpResponse()
+
+    bb = bbox.split(',')
+
+    try:
+        grid = Grid(bb[1],bb[0],bb[3],bb[2])
+        fc = grid.build_grid_fc()
+    except GridException:
+        error = dict(error=500, details="Can't create grids across longitudinal boundaries. Try creating a smaller bounding box",)
+        return HttpResponse(json.dumps(error), status=error.get('error'))
+
+    return HttpResponse(fc.__str__(), mimetype="application/json")
+
+def geocode(request):
+    """
+    Proxy to geocode service
+    """
+
+    base_url = "http://geoservices.tamu.edu/Services/Geocode/WebService/GeocoderWebServiceHttpNonParsed_V04_01.aspx"
+    params['apiKey'] = '57956afd728b4204bee23dbb17f00573'
+    params['version'] = '4.01'
+
+def aoi_delete(request,pk):
+    try:
+        aoi = AOI.objects.get(pk=pk)
+        aoi.delete()
+    except ObjectDoesNotExist:
+        raise Http404
+
+    return HttpResponse( status=200 )
 
 @login_required
 def batch_create_aois(request, *args, **kwargs):

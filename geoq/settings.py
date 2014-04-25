@@ -75,7 +75,7 @@ MEDIA_URL = '/images/'
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
 STATIC_URL_FOLDER = ''  # Can be set to something like 'geoq-test/' if the app is not run at root level
-STATIC_ROOT = '{0}{1}'.format('/usr/src/static/', STATIC_URL_FOLDER)
+STATIC_ROOT = '{0}{1}'.format('/opt/src/pyenv/geoq/geoq-django/geoq/static/', STATIC_URL_FOLDER)
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -210,6 +210,7 @@ INSTALLED_APPS = (
 #    'geoq.badges', # TODO: Get Badges working, or incorportae with gamification service
     'geoq.core',
     'geoq.maps',
+    'geoq.mgrs'
 )
 
 # A sample logging configuration. The only tangible logging
@@ -243,6 +244,11 @@ LOGGING = {
 
 # Set default login location
 #LOGIN_REDIRECT_URL = '/'
+
+# Gamification variables
+GAMIFICATION_SERVER = 'http://192.168.5.129:6111'
+GAMIFICATION_PROJECT = 'django_geoq'
+
 
 
 # Override production settings with local settings if they exist

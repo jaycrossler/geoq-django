@@ -46,7 +46,7 @@ SERVICE_TYPES = (
                 ('GeoJSON', 'GeoJSON'),
                 ('WMS', 'WMS'),
                 #('ArcGIS93Rest', 'ArcGIS93Rest'),
-                #('KML', 'KML'),
+                ('KML', 'KML'),
                 #('GeoRSS', 'GeoRSS'),
                 #('GPX','GPX'),
                 #('GML','GML'),

@@ -792,33 +792,6 @@
     }
 },
 {
-    "pk": 103,
-    "model": "auth.permission",
-    "fields": {
-        "codename": "add_groupobjectpermission",
-        "name": "Can add group object permission",
-        "content_type": 29
-    }
-},
-{
-    "pk": 104,
-    "model": "auth.permission",
-    "fields": {
-        "codename": "change_groupobjectpermission",
-        "name": "Can change group object permission",
-        "content_type": 29
-    }
-},
-{
-    "pk": 105,
-    "model": "auth.permission",
-    "fields": {
-        "codename": "delete_groupobjectpermission",
-        "name": "Can delete group object permission",
-        "content_type": 29
-    }
-},
-{
     "pk": 1,
     "model": "auth.group",
     "fields": {

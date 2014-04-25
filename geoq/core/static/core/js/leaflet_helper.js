@@ -7,6 +7,7 @@ leaflet_helper.styles.extentStyle = {"weight":2,"color":"red","fill":null,"opaci
 leaflet_helper.styles.completed = {"weight":2,"color":"green","fillColor":"green","fillOpacity":.9,"opacity":1};
 leaflet_helper.styles.in_work = {"weight":2,"color":"yellow","fillColor":"orange","fillOpacity":.9,"opacity":1};
 leaflet_helper.styles.assigned = {"weight":2,"color":"orange","fillColor":"orange","fillOpacity":.9,"opacity":1};
+leaflet_helper.proxy_path = "/geoq/proxy/";
 
 
 leaflet_helper.layer_conversion = function(lyr){
@@ -27,6 +28,7 @@ leaflet_helper.layer_conversion = function(lyr){
     console.log(layerParams);
 
     var esriPluginInstalled = L.hasOwnProperty('esri');
+    var ajaxPluginInstalled = L.hasOwnProperty('ajax');
 
     if (!esriPluginInstalled){
         console.log('Esri Leaflet plugin not installed.  Esri layer types disabled.');
@@ -63,20 +65,101 @@ leaflet_helper.layer_conversion = function(lyr){
     if (lyr.type=='GeoJSON'){
         layerOptions = options;
 
-        function addGeojson(e){
-            alert('here');
-            return new L.GeoJSON(e, layerOptions);
+        var result = $.ajax({
+            type: 'GET',
+            url: leaflet_helper.proxy_path + encodeURI(lyr.url),
+            dataType: 'json',
+            async: false
+        });
+
+        if ( result.status == 200 ) {
+            return new L.GeoJSON(JSON.parse(result.responseText), layerOptions);
+        } else {
+            return undefined;
         }
 
-        $.ajax({
-            type: 'GET',
-            url: lyr.url,
-            dataType: 'json',
-            success: function(result){
-                addGeojson(result);
+    }
+
+    if (lyr.type=='KML') {
+        layerOptions = options;
+        layerOptions['async'] = true;
+
+        return new L.KML(leaflet_helper.proxy_path + encodeURI(lyr.url), layerOptions);
+    }
+
+    if (lyr.type=='KMZ') {
+        layerOptions = options;
+        return new L.KMZ(leaflet_helper.proxy_path + encodeURI(lyr.url), layerOptions);
+
+/*        function readData(data) {
+            var unzip = new JSUnzip();
+            unzip.open(data);
+            for (f in unzip.files) {
+                if (f.lastIndexOf("kml") > 0 ) {
+                    var data = unzip.data(f);
+                    var reader = new FileReader();
+                }
             }
 
-        })
+            alert('unzipped file');
+        }
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", leaflet_helper.proxy_path + encodeURI(lyr.url), true);
+        xhr.overrideMimeType("text/plain; charset=x-user-defined");
+
+        xhr.onreadystatechange = function(e) {
+            if ( this.readyState == 4 && this.status == 200 ) {
+                var kmz = this.responseText;
+                readData(kmz);
+            }
+        };*/
+
+/*        function readData(datablob) {
+            var unzipper = new JSUnzip(datablob);
+            if (unzipper.isZipFile()) {
+                unzipper.readEntries();
+                for (var i = 0; i < unzipper.entries.length; i++ ) {
+                    var data;
+                    if (unzipper.entries[i].compressionMethod === 8 ) {
+                        data = JSInflate.inflate(unzipper.entries[i].data);
+                    } else {
+                        // uncompressed
+                        data = unzipper.entries[i].data;
+                    }
+
+                    // save to a file location
+                    if (filesystem) {
+                        filesystem.root.getFile(unzipper.entries[i].fileName, {create: true}, function(fileEntry) {
+                            fileEntry.createWriter(function(fileWriter) {
+                                fileWriter.onwriteend = function(e) {
+                                    return
+                                }
+                            })
+                        }, errorHandler);
+                    }
+
+                    console.log("entry:" + unzipper.entries[i].fileName);
+                }
+            }
+        }
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", leaflet_helper.proxy_path + encodeURI(lyr.url), true);
+        xhr.responseType = 'blob';
+
+        xhr.onload = function(e) {
+            if (this.status == 200 ) {
+                var datablob = this.response;
+                var reader = new window.FileReader();
+                reader.readAsBinaryString(datablob);
+                reader.onloadend = function() {
+                    readData(reader.result);
+                }
+            }
+        }
+
+        xhr.send();*/
 
     }
 

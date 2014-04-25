@@ -19,6 +19,8 @@ aoi_feature_edit.init = function(aoi_id, aoi_map_json, aoi_extent, job_features_
     aoi_feature_edit.drawcontrol = null;
     aoi_feature_edit.featureLayers = [];
     aoi_feature_edit.icons = [];
+    aoi_feature_edit.filesystem;
+    aoi_feature_edit.resourceDir;
 
 /*    for( var i = 1; i <= aoi_feature_edit.feature_types.length; i++) {
         aoi_feature_edit.featureLayers[i] = L.geoJson( null,
@@ -66,10 +68,10 @@ aoi_feature_edit.map_init = function(map, bounds){
             if (n!==undefined){
                 if (l.isBaseLayer){
                     baseLayers[l.name]=n
-                    console.log("Added " + l.name + "as a base layer.")
+                    console.log("Added " + l.name + " as a base layer.")
                 }else{
                     layerSwitcher[l.name]= n;
-                    console.log("Added " + l.name + "as a layer.")
+                    console.log("Added " + l.name + " as a layer.")
                 }
             }
         });

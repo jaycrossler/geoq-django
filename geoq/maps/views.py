@@ -60,6 +60,10 @@ class CreateFeatures(View):
             response = Feature(**attrs)
             response.full_clean()
             response.save()
+
+            # update AOI status
+            aoi.status = aoi.STATUS_VALUES[2]
+            aoi.save()
         except ValidationError as e:
             return HttpResponse(content=json.dumps(dict(errors=e.messages)), mimetype="application/json", status=400)
 
