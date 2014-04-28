@@ -33,8 +33,12 @@
     }
 
     function removeFeature(e) {
-        var layer = e.layer;
-        aois.removeLayer(this._leaflet_id);
+        // get FeatureLayer key
+        for (var key in aois._layers) {
+            if (aois._layers[key]._layers[e.target._leaflet_id]) {
+                aois._layers[key].removeLayer(e.target);
+            }
+        }
     }
 
     function mapInit(map, bounds) {
@@ -112,7 +116,7 @@
 
 
             map.on('draw:created', function (e) {
-                map.fitBounds(e.layer.getBounds());
+                // map.fitBounds(e.layer.getBounds());
                 var type = e.layerType,
                     layer = e.layer;
 
